@@ -1,0 +1,15 @@
+[Unit]
+Description=A simple Docker control panel for remote servers.
+
+[Service]
+ExecStart=/home/nick/dev/dockerman/server.ts
+Restart=always
+User=nick
+# Note Debian/Ubuntu uses 'nogroup', RHEL/Fedora uses 'nobody'
+Group=nogroup
+Environment=PATH=/usr/bin:/usr/local/bin
+Environment=NODE_ENV=production
+WorkingDirectory=/home/nick/dev/dockerman
+
+[Install]
+WantedBy=multi-user.target
