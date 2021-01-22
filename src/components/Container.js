@@ -1,7 +1,7 @@
 import Button from './Button';
 import Status from './Status';
 
-const Application = (props) => {
+const Container = (props) => {
     return (
         <div className='application'>
             <h2>{props.title}</h2>
@@ -13,8 +13,8 @@ const Application = (props) => {
     )
 }
 
-Application.defaultProps = {
+Container.defaultProps = {
     title: 'Container',
 }
 
-export default Application
+export default Container

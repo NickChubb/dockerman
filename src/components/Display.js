@@ -1,10 +1,11 @@
-import Application from './Application';
+import Container from './Container.js';
 
 const Display = () => {
     return (
         <div className='container'>
-            <Application />
-            <Application />
+            <Container />
+            <Container />
+            <Container />
         </div>
     )
 }
