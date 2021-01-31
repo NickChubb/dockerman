@@ -1,14 +1,18 @@
 import logo from './logo.svg';
 import './App.css';
-import Header from './components/Header.js';
-import Display from './components/Display.js';
-import Footer from './components/Footer.js';
+
+/**
+ * Import all page components here
+ */
+import Header from './components/Header';
+import Footer from './components/Footer';
+import Routes from './components/Routes';
 
 function App() {
   return (
     <div className="App">
       <Header />
-      <Display />
+      <Routes />
       <Footer />
     </div>
   );

@@ -5,11 +5,39 @@ const Docker = require('dockerode');
 const router = express.Router();
 const docker = new Docker({ socketPath: '/var/run/docker.sock' });
 
+
+
+
+router.post('/restartContainer/:containerId', (req, res) => {
+    let id = req.params['containerId'];
+    let container = docker.getContainer(id);
+    container.restart();
+});
+
+router.post('/startContainer/:containerId', (req, res) => {
+    let id = req.params['containerId'];
+    let container = docker.getContainer(id);
+    container.start();
+});
+
+router.post('/stopContainer/:containerId', (req, res) => {
+    let id = req.params['containerId'];
+    let container = docker.getContainer(id);
+    container.stop();
+});
+
+router.get('/getContainer/:containerId', (req, res) => {
+    let id = req.params['containerId'];
+    let container = docker.getContainer(id);
+
+    res.send(container);
+})
+
 /**
   *  Returns an array of JSON objects, each corresponding to a running Docker container on server.
 */
 router.get('/getContainers', (req,res) => {
-    docker.listContainers().then(containers => {return res.json(containers)});
+    docker.listContainers({all: true}).then(containers => {return res.json(containers)});
     console.log('👉 sent list of containers');
 });
 

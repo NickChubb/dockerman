@@ -1,7 +1,11 @@
+import { Link } from 'react-router-dom';
+
 const Header = () => {
     return (
-        <header>
-            <h1>DockerMan</h1>
+        <header class='header'>
+            <Link to="..">
+                <h1>DockerMan</h1>
+            </Link>
         </header>
     )
 }

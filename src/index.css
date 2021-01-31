@@ -10,8 +10,8 @@ body {
   font-family: 'Poppins', sans-serif;
 }
 
-.container {
-  max-width: 500px;
+.display {
+  max-width: 60%;
   margin: 30px auto;
   overflow: auto;
   min-height: 300px;
@@ -54,18 +54,18 @@ body {
   width: 100%;
 }
 
-.task {
+.container {
   background: #f4f4f4;
   margin: 5px;
   padding: 10px 20px;
   cursor: pointer;
 }
 
-.task.reminder {
+.container.reminder {
   border-left: 5px solid green;
 }
 
-.task h3 {
+.container h3 {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -109,4 +109,8 @@ body {
 .footer {
   padding-bottom: 15px;
   text-align: center;
+}
+
+.header {
+  padding-top: 30px;
 }

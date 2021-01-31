@@ -20,10 +20,15 @@ app.use(bodyParser.json());
 
 app.use(express.static(path.join(__dirname + "/build")));
 app.use("/api", require('./api.js'));
+app.use("/container", require('./container.js'));
 
 app.get("/", (req, res) => {
     res.sendFile(__dirname + "/build/index.html");
 })
+
+/**
+ * 
+ */
 
 
 

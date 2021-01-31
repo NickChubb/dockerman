@@ -1,5 +1,5 @@
-const Button = ({ colour, text }) => {
-    return <button style={{backgroundColor: colour}} className='btn'>{text}</button>
+const Button = ({ color, text, onClick }) => {
+    return <button style={{backgroundColor: color}} className='btn' onClick={onClick}>{text}</button>
 }
 
 export default Button
