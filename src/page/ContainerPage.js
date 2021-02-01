@@ -1,6 +1,6 @@
 import React from 'react';
 import { useParams } from 'react-router-dom';
-import { fetchContainer } from './api/container';
+import { fetchContainer } from '../components/api/container';
 
 
 const ContainerPage = () => {

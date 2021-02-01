@@ -5,8 +5,9 @@ const Docker = require('dockerode');
 const router = express.Router();
 const docker = new Docker({ socketPath: '/var/run/docker.sock' });
 
-
-
+/**
+ * Containers API
+ */
 
 router.post('/restartContainer/:containerId', (req, res) => {
     let id = req.params['containerId'];
