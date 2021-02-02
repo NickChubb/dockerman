@@ -19,27 +19,37 @@ router.post('/startContainer/:containerId', (req, res) => {
     let id = req.params['containerId'];
     let container = docker.getContainer(id);
     container.start();
+    res.sendStatus(200);
 });
 
 router.post('/stopContainer/:containerId', (req, res) => {
     let id = req.params['containerId'];
     let container = docker.getContainer(id);
     container.stop();
+    res.sendStatus(200);
 });
 
 router.get('/getContainer/:containerId', (req, res) => {
     let id = req.params['containerId'];
     let container = docker.getContainer(id);
-
     res.send(container);
+})
+
+router.get('/getContainer/:containerId/inspect', async (req, res) => {
+    let id = req.params['containerId'];
+    let container = docker.getContainer(id);
+    let response = await container.inspect();
+    console.log("👉 GET /getContainerInfo/" + id);
+    console.log("👈 RESPONSE : " + JSON.stringify(response));
+    res.send(response);
 })
 
 /**
   *  Returns an array of JSON objects, each corresponding to a running Docker container on server.
 */
 router.get('/getContainers', (req,res) => {
+    console.log("👉 GET /getContainers");
     docker.listContainers({all: true}).then(containers => {return res.json(containers)});
-    console.log('👉 sent list of containers');
 });
 
 /**
@@ -47,13 +57,15 @@ router.get('/getContainers', (req,res) => {
 */
 router.get('/getContainers/:containerIndex', (req, res) => {
     let index = req.params['containerIndex'];
+    console.log("👉 GET /getContainers/" + index);
     docker.listContainers().then(containers => {
         if (index < containers.length){
 
             // index in bounds, send container
-            res.status(200);
-
-            console.log('👉 sent container with index: ' + index);  
+            const response = containers[index];
+            console.log("👈 RESPONSE : " + JSON.stringify(response));
+            
+            res.status(200);  
             return res.json(containers[index]);
 
         } else {

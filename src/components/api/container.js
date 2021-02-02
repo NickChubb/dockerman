@@ -4,7 +4,15 @@ import { homepage } from '../../../package.json';
 export const fetchContainer = async (id) => {
     let res = await fetch(`${homepage}/api/getContainer/${id}`);
     let data = await res.json();
-    console.log(data);
+    // console.log(data);
+    return data;
+}
+
+// Fetch individual container from API based on ID and return its information
+export const fetchContainerInfo = async (id) => {
+    let res = await fetch(`${homepage}/api/getContainer/${id}/inspect`);
+    let data = await res.json();
+    // console.log("GET /getContainerInfo = " + JSON.stringify(data));
     return data;
 }
 
@@ -12,6 +20,24 @@ export const fetchContainer = async (id) => {
 export const fetchContainers = async () => {
     let res = await fetch(`${homepage}/api/getContainers`);
     let data = await res.json();
-    console.log(data);
+    // console.log(data);
     return data;
+}
+
+// Start container by ID
+export const startContainer = async (id) => {
+    let res = await fetch(`${homepage}/api/startContainer/${id}`, {
+        method: 'POST'
+    });
+    // console.log(res.status);
+    return res.status;
+}
+
+// Stop container by ID
+export const stopContainer = async (id) => {
+    let res = await fetch(`${homepage}/api/stopContainer/${id}`, {
+        method: 'POST'
+    });
+    // console.log(res.status);
+    return res.status;
 }
