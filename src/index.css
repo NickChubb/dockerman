@@ -8,16 +8,18 @@
 
 body {
   font-family: 'Poppins', sans-serif;
+  background: #272727;
 }
 
 .display {
-  max-width: 60%;
+  max-width: 70%;
   margin: 30px auto;
   overflow: auto;
   min-height: 300px;
   border: 1px solid steelblue;
   padding: 30px;
   border-radius: 5px;
+  background:  url('./img/grainy_background.png'), rgb(30,30,30);
 }
 
 .application {
@@ -55,10 +57,11 @@ body {
 }
 
 .container {
-  background: #e9e9e9;
-  border: 1px solid #dadada;
+  background: #505050;
+  border: 1px solid #3b3b3b;
+  border-radius: 3px;
   margin: 5px;
-  padding: 10px 20px;
+  padding: 10px;
   cursor: pointer;
 }
 
@@ -107,11 +110,18 @@ body {
   height: 20px;
 }
 
-.footer {
-  padding-bottom: 15px;
-  text-align: center;
-}
+
 
 .header {
   padding-top: 30px;
+}
+
+.info-field {
+  max-width: 300px;
+  min-height: 300px;
+  background: #e9e9e9;
+  border-radius: 3px;
+  border: 1px solid #dadada; 
+  margin: 10px;
+  padding: 10px;
 }

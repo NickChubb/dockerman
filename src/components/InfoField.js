@@ -1,9 +1,10 @@
-import React from 'react'
+import React from 'react';
+import '../index.css';
 
-const InfoField = () => {
+const InfoField = ({ title }) => {
     return (
-        <div>
-            
+        <div className="info-field">
+            <h3>{title}</h3>
         </div>
     )
 }

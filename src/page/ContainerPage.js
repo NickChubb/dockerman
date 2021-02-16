@@ -1,6 +1,7 @@
 import React from 'react';
 import { useParams } from 'react-router-dom';
 import { fetchContainerInfo } from '../components/api/container';
+import InfoField from '../components/InfoField';
 
 
 const ContainerPage = () => {
