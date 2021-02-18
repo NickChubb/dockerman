@@ -11,7 +11,9 @@ function App() {
   return (
     <div className="App">
       <Header />
-      <Routes />
+      <div className="body">
+        <Routes />
+      </div>
       <Footer />
     </div>
   );

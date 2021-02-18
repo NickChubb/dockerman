@@ -14,6 +14,7 @@ body {
 .display {
   max-width: 70%;
   margin: 30px auto;
+  margin-bottom: 200px;
   overflow: auto;
   min-height: 300px;
   border: 1px solid steelblue;
@@ -110,7 +111,13 @@ body {
   height: 20px;
 }
 
-
+.footer {
+  padding: 15px;
+  text-align: center;
+  border-top: 1px solid #313131;
+  color: steelblue;
+  background:  url('./img/grainy_background.png'), rgb(30,30,30);
+}
 
 .header {
   padding-top: 30px;
