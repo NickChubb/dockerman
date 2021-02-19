@@ -41,3 +41,12 @@ export const stopContainer = async (id) => {
     // console.log(res.status);
     return res.status;
 }
+
+// Remove container by ID
+export const removeContainer = async (id) => {
+    let res = await fetch(`${homepage}/api/removeContainer/${id}`, {
+        method: 'DELETE'
+    });
+    // console.log(res.status);
+    return res.status;
+}

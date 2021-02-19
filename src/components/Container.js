@@ -16,7 +16,6 @@ const Container = ({container, key}) => {
                 <h2>{container.Names[0].substring(1)}</h2>
             </Link>
             <Status state={container.State} id={container.Id} />
-            <Button color='blue' text='Restart' onClick={restart(container.Id)} disabled={true}/>
         </div>
     )
 }

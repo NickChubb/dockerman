@@ -22,10 +22,24 @@ router.post('/startContainer/:containerId', (req, res) => {
     res.sendStatus(200);
 });
 
+router.post('/restartContainer/:containerId', (req, res) => {
+    let id = req.params['containerId'];
+    let container = docker.getContainer(id);
+    container.restart();
+    res.sendStatus(200);
+});
+
 router.post('/stopContainer/:containerId', (req, res) => {
     let id = req.params['containerId'];
     let container = docker.getContainer(id);
     container.stop();
+    res.sendStatus(200);
+});
+
+router.delete('/removeContainer/:containerId', (req, res) => {
+    let id = req.params['containerId'];
+    let container = docker.getContainer(id);
+    container.remove();
     res.sendStatus(200);
 });
 
