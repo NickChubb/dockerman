@@ -135,6 +135,18 @@ router.get('/getContainers/:containerIndex/log', (req, res) => {
   });
 })
 
+/**
+ * Images API
+ */
+
+router.get('/getImages', (req,res) => {
+    console.log("👉 GET /getImages");
+    docker.listImages({all: true}).then(containers => {return res.json(containers)});
+});
+
+/**
+ * Helpers
+ */
 async function streamToString (stream) {
   const chunks = []
   return new Promise((resolve, reject) => {
