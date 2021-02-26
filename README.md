@@ -19,4 +19,3 @@ Updating frequently.
 ### 3. Password Protected
 
 - Admin username and password required to log in for extra security
-- Can be disabled or changed via the config.json file
