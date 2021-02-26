@@ -31,6 +31,10 @@ body {
   margin-right: 150px;
 }
 
+.display p {
+  color: lightblue;
+}
+
 .application {
   display: flex;
   justify-content: space-between;

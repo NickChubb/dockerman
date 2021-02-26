@@ -9,16 +9,6 @@ import MainPage from './page/MainPage';
 import ContainerPage from './page/ContainerPage';
 import LoginPage from './page/LoginPage';
 
-// function setToken(userToken) {
-//   sessionStorage.setItem('token', JSON.stringify(userToken));
-// }
-
-// function getToken() {
-//   const tokenString = sessionStorage.getItem('token');
-//   const userToken = JSON.parse(tokenString);
-//   return userToken?.token
-// }
-
 /**
  * All routes go here.
  * Don't forget to import the components above after adding new route.

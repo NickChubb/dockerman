@@ -11,7 +11,7 @@ const router = express.Router();;
 router.use('/', (req, res) => {
 
     const credentials = req.body;
-    const validCredentials = { "username": config.username, "password": config.password }
+    const validCredentials = { "username": config.auth.username, "password": config.auth.password };
 
     if (JSON.stringify(credentials) == JSON.stringify(validCredentials)) {
         res.status(200);

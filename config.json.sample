@@ -1,7 +1,6 @@
 {
     "auth":
     {
-        "enabled": true,
         "username": "admin",
         "password": "default"
     }
