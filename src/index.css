@@ -23,7 +23,7 @@ body {
   background:  url('./img/grainy_background.png'), rgb(30,30,30);
 }
 
-.display h2 {
+.display > h2 {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -69,7 +69,8 @@ body {
   background: #505050;
   border: 1px solid #3b3b3b;
   border-radius: 3px;
-  margin: 5px;
+  margin-top: 5px;
+  margin-bottom: 5px;
   padding: 10px;
   cursor: pointer;
 }
@@ -139,4 +140,18 @@ body {
   border: 1px solid #dadada; 
   margin: 10px;
   padding: 10px;
+}
+
+.disabled {
+  color: #505050;
+}
+
+.topbar {
+
+}
+
+.topbar h3 {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
