@@ -15,3 +15,8 @@ Updating frequently.
 ### 2. Container Control Panel
 
 - See information about a container, view the logs, ports, etc. (More soon)
+
+### 3. Password Protected
+
+- Admin username and password required to log in for extra security
+- Can be disabled or changed via the config.json file
