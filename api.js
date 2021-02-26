@@ -150,6 +150,20 @@ router.delete('/pruneImages', (req,res) => {
 });
 
 /**
+ * System API
+ */
+
+router.get('/getSystemInfo', (req,res) => {
+    console.log("👉 GET /getSystemInfo");
+    docker.df().then(info => {return res.json(info)});
+});
+
+router.get('/getDockerVersion', (req,res) => {
+    console.log("👉 GET /getDockerVersion");
+    docker.version().then(version => {return res.json(version)});
+});
+
+/**
  * Helpers
  */
 async function streamToString (stream) {
