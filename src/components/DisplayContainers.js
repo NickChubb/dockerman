@@ -20,8 +20,8 @@ const DisplayContainers = () => {
     return (
         <>
             <h2>
-                <span className="disabled">Containers</span>
-                <Link to="/images">Images</Link>
+                <span className="subpage-header">Containers</span>
+                <Link to="/images" className="unfocused">Images</Link>
             </h2>
             <h3 className="topbar">
                 <Button text="prune -a" />

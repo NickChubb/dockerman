@@ -25,7 +25,7 @@ const SystemInfo = () => {
 
     return (
         <span>
-            <strong>Size:</strong> {formatBytes(info.LayersSize)} | <strong>Docker Version:</strong> {version.Version}
+            <strong>Docker Size:</strong> {formatBytes(info.LayersSize)} | <strong>Docker Version:</strong> {version.Version}
         </span>
     )
 }

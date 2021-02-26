@@ -20,8 +20,8 @@ const DisplayImages = () => {
     return (
         <>
             <h2>
-                <Link to="/">Containers</Link>
-                <span className="disabled">Images</span>
+                <Link to="/" className="unfocused">Containers</Link>
+                <span className="subpage-header">Images</span>
             </h2>
             <h3 className="topbar">
                 <Button text="prune -a" onClick={() => pruneImages()}/>

@@ -146,8 +146,12 @@ body {
   padding: 10px;
 }
 
-.disabled {
+.unfocused {
   color: #505050;
+}
+
+.unfocused:hover {
+  color: default;
 }
 
 .topbar {
@@ -162,4 +166,8 @@ body {
 
 .system-info {
   color: lightblue;
+}
+
+.subpage-header {
+  color: #007bff;
 }
