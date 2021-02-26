@@ -1,7 +1,6 @@
 import Images from './Images.js';
-import DisplayControl from './DisplayControl.js';
 import Button from './Button.js';
-import { fetchImages } from './api/image';
+import { fetchImages, pruneImages } from './api/image';
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
@@ -25,7 +24,7 @@ const DisplayImages = () => {
                 <span className="disabled">Images</span>
             </h2>
             <h3 className="topbar">
-                <Button text="prune -a" />
+                <Button text="prune -a" onClick={() => pruneImages()}/>
             </h3>
             <Images images={images} />
         </>

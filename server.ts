@@ -23,7 +23,7 @@ app.use("/api", require('./api.js'));
 app.use("/container", require('./container.js'));
 app.use('/login', require('./login.js'));
 
-app.get("/", (req, res) => {
+app.get("/*", (req, res) => {
     res.sendFile(__dirname + "/build/index.html");
 })
 

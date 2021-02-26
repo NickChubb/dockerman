@@ -1,5 +1,4 @@
 import Containers from './Containers.js';
-import DisplayControl from './DisplayControl.js';
 import Button from './Button.js';
 import { fetchContainers } from './api/container';
 import { useState, useEffect } from 'react';

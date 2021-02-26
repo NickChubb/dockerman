@@ -7,3 +7,11 @@ export const fetchImages = async () => {
     // console.log(data);
     return data;
 }
+
+export const pruneImages = async () => {
+    let res = await fetch(`${homepage}/api/pruneImages`, {
+        method: 'DELETE'
+    });
+    // console.log(data);
+    return res.status;
+}

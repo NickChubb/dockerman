@@ -141,7 +141,12 @@ router.get('/getContainers/:containerIndex/log', (req, res) => {
 
 router.get('/getImages', (req,res) => {
     console.log("👉 GET /getImages");
-    docker.listImages({all: true}).then(containers => {return res.json(containers)});
+    docker.listImages({all: true}).then(images => {return res.json(images)});
+});
+
+router.delete('/pruneImages', (req,res) => {
+    console.log("👉 DELETE /pruneImages");
+    docker.pruneImages().then(images => {return res.json(images)});
 });
 
 /**
