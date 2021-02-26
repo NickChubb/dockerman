@@ -2,7 +2,7 @@
 
 A simple server-side docker controller made with React. 
 
-![Container View](https://i.imgur.com/ri6RXxo.png)
+![Container View](https://i.imgur.com/SSSvSlA.png)
 
 ## Features
 
