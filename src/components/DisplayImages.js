@@ -22,6 +22,7 @@ const DisplayImages = () => {
             <h2>
                 <Link to="/" className="unfocused">Containers</Link>
                 <span className="subpage-header">Images</span>
+                <Link to="/repo" className="unfocused">Repo</Link>
             </h2>
             <h3 className="topbar">
                 <Button text="prune -a" onClick={() => pruneImages()}/>

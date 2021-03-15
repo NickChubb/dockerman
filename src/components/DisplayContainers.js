@@ -22,6 +22,7 @@ const DisplayContainers = () => {
             <h2>
                 <span className="subpage-header">Containers</span>
                 <Link to="/images" className="unfocused">Images</Link>
+                <Link to="/repo" className="unfocused">Repo</Link>
             </h2>
             <h3 className="topbar">
                 <Button text="prune -a" />

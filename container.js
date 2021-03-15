@@ -18,10 +18,6 @@ router.use(bodyParser.json());
 /**
   *  Returns an array of JSON objects, each corresponding to a running Docker container on server.
 */
-// router.get('/getContainers', (req,res) => {
-//     docker.listContainers({all: true}).then(containers => {return res.json(containers)});
-//     console.log('👉 sent list of containers');
-// });
 
 // router.get('/:containerId', (req, res) => {
 //     let id = req.params['containerId'];
@@ -31,7 +27,8 @@ router.use(bodyParser.json());
     
 // })
 
-// router.use('/:containerId/:port', )
+
+router.use('/:containerId/' + port, )
 
 const getContainerUi = async (containerId) => {
     let container = docker.getContainer(id);
