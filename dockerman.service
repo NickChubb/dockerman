@@ -2,7 +2,7 @@
 Description=A simple Docker control panel for remote servers.
 
 [Service]
-ExecStart=/home/nick/dev/dockerman/server.ts
+ExecStart=/home/nick/dev/dockerman/server.js
 Restart=always
 User=nick
 # Note Debian/Ubuntu uses 'nogroup', RHEL/Fedora uses 'nobody'

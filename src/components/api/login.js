@@ -3,7 +3,7 @@ import { homepage } from '../../../package.json';
 // Fetch individual container from API based on ID and return it
 export const loginUser = async (credentials) => {
     
-    let response = await fetch(`${homepage}/login`, {
+    let response = await fetch(`${homepage}/api/login`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'

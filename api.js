@@ -5,6 +5,8 @@ const Docker = require('dockerode');
 const router = express.Router();
 const docker = new Docker({ socketPath: '/var/run/docker.sock' });
 
+app.use('/login', require('./login.js'));
+
 /**
  * Containers API
  */

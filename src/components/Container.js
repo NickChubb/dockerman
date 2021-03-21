@@ -1,5 +1,6 @@
 import Button from './Button';
 import Status from './Status';
+import Serve from './Serve';
 import { Link } from 'react-router-dom';
 
 const Container = ({container, key}) => {
@@ -16,6 +17,7 @@ const Container = ({container, key}) => {
                 <h2>{container.Names[0].substring(1)}</h2>
             </Link>
             <Status state={container.State} id={container.Id} />
+            <Serve />
         </div>
     )
 }

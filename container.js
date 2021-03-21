@@ -27,9 +27,6 @@ router.use(bodyParser.json());
     
 // })
 
-
-router.use('/:containerId/' + port, )
-
 const getContainerUi = async (containerId) => {
     let container = docker.getContainer(id);
     console.log(container);
