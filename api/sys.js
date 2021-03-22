@@ -1,5 +1,8 @@
 const express = require('express');
-const router = express.Router();;
+const Docker = require('dockerode');
+
+const router = express.Router();
+const docker = new Docker({ socketPath: '/var/run/docker.sock' });
 
 /**
  * GET endpoint for docker system info

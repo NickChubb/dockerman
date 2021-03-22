@@ -3,7 +3,7 @@ import { homepage } from '../../../package.json';
 // 
 export const loginUser = async (credentials) => {
     
-    let response = await fetch(`${homepage}/api/login`, {
+    let response = await fetch(`${homepage}/api/auth/login`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
