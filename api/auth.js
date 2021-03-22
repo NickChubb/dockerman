@@ -1,14 +1,14 @@
-const config =  require('./config.json');
+const config =  require('../config.json');
 const { v4: uuidv4 } = require('uuid');
 
 const express = require('express');
 const router = express.Router();;
 
 /**
- * Login API
+ * Auth API
  */
-
-router.use('/', (req, res) => {
+ 
+router.use('/login', (req, res) => {
 
     const credentials = req.body;
     const validCredentials = { "username": config.auth.username, "password": config.auth.password };
@@ -22,7 +22,5 @@ router.use('/', (req, res) => {
         res.sendStatus(401);
     }
 });
-
-
 
 module.exports = router;

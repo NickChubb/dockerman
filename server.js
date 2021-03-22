@@ -19,8 +19,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
 app.use(express.static(path.join(__dirname + "/build")));
-app.use("/api", require('./api.js'));
-app.use("/container", require('./container.js'));
+app.use("/api", require('./api/api.js'));
 
 app.get("/*", (req, res) => {
     res.sendFile(__dirname + "/build/index.html");
