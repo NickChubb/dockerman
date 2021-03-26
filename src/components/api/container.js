@@ -26,7 +26,7 @@ export const fetchContainers = async () => {
 
 // Start container by ID
 export const startContainer = async (id) => {
-    let res = await fetch(`${homepage}/api/container/${id}/start`, {
+    let res = await fetch(`${homepage}/api/containers/${id}/start`, {
         method: 'POST'
     });
     // console.log(res.status);
@@ -35,7 +35,7 @@ export const startContainer = async (id) => {
 
 // Stop container by ID
 export const stopContainer = async (id) => {
-    let res = await fetch(`${homepage}/api/container/${id}/stop`, {
+    let res = await fetch(`${homepage}/api/containers/${id}/stop`, {
         method: 'POST'
     });
     // console.log(res.status);
@@ -44,7 +44,7 @@ export const stopContainer = async (id) => {
 
 // Remove container by ID
 export const removeContainer = async (id) => {
-    let res = await fetch(`${homepage}/api/container/${id}/remove`, {
+    let res = await fetch(`${homepage}/api/containers/${id}/remove`, {
         method: 'DELETE'
     });
     // console.log(res.status);

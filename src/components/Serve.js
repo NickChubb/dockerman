@@ -42,8 +42,6 @@ const Serve = ({ ports, id, name }) => {
                     {enabled ? <FormControl id="slug" placeholder="" /> : <FormControl id="slug" placeholder={name} disabled />}
                     
                 </InputGroup>
-
-                {/* <Button variant="primary" type="submit" text="Serve" /> */}
             </Form>
         </>
     )
