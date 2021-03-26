@@ -4,8 +4,8 @@ const Containers = ({containers}) => {
 
     return (
         <>
-            {containers.map((container, i) => (
-                    <Container key={i} container={container} />
+            {containers.map((container) => (
+                    <Container container={container} />
             ))}
         </>
     )

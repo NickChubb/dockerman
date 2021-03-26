@@ -84,10 +84,27 @@ body {
   border-left: 5px solid green;
 }
 
+.container h2 {
+  padding: 5px;
+}
+
 .container h3 {
   display: flex;
   align-items: center;
   justify-content: space-between;
+}
+
+.form {
+  display: flex;
+  align-items: center;
+}
+
+#slug {
+  padding-left: 5px;
+}
+
+.form > * {
+  margin: 5px;
 }
 
 .add-form {
@@ -95,7 +112,7 @@ body {
 }
 
 .form-control {
-  margin: 20px 0;
+  padding: 0 0;
 }
 
 .form-control label {
