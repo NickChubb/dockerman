@@ -1,3 +1,7 @@
+const express = require('express');
+const bodyParser = require('body-parser');
+const path = require('path');
+const proxy = require('express-http-proxy')
 const Sequelize =  require('sequelize');
 const moment = require('moment');
 
@@ -44,7 +48,9 @@ class Database  {
      */
     async getServices() {
         const services = await this.services.findAll({ order: [['created', 'DESC']] });
-        console.log("Sent Services.");
+        services.forEach(service => {
+            console.log(`${service.name}, ${service.served}, ${service.slug}, ${service.port}`);
+        })
         return services;
     }
 
@@ -92,6 +98,10 @@ class Database  {
         });
 
         console.log("🗄 Added new service to DB.");
+
+        this.router = new Routes();
+        this.routes.sync();
+
         return newService;
     }
 
@@ -120,6 +130,9 @@ class Database  {
         service.save();
 
         console.log(`🗄🔄 Updated ${service.name} to served: ${served}, slug: ${slug}, port: ${port}.`);
+
+        this.router = new Routes();
+        this.routes.sync();
     }
 
     /**
@@ -134,4 +147,57 @@ class Database  {
     }
 }
 
-module.exports = Database;
+/**
+    Router object manages the express router 
+ */
+class Router {
+
+    constructor() {
+
+        // Singleton design pattern
+        if (Router.instance) { return Router.instance; }
+
+        this.app = express();
+        let port = 3050;
+
+        this.db = new Database();
+        this.db.sync();
+
+        this.app.use(bodyParser.urlencoded({ extended: false }));
+        this.app.use(bodyParser.json());
+
+        this.app.use(express.static(path.join(__dirname + "/build")));
+        this.app.use("/api", require('./lib/api.js'));
+
+        this.sync();
+
+        this.app.listen(port, () => {
+            console.log(`Listening to requests on http://localhost:${port}`);
+        });
+
+        Router.instance = this;
+    }
+
+    /**
+        Sync the routes served with the services from the db
+     */
+    sync() {
+        this.db.getServices().then( services => {
+            services.filter( service => service.served)
+                .forEach( service => {
+                    let name = service.name;
+                    let port = service.port;
+                    let slug = service.slug;
+                    console.log(`🕸 serving ${name} on port:${port} at nickchubb.ca/${slug}`);
+                    this.app.use('/' + slug, proxy('localhost:' + port))
+                });
+                
+                this.app.get("/*", (req, res) => {
+                    res.sendFile(__dirname + "/build/index.html");
+                })
+        })
+    }
+
+}
+
+module.exports = { Database, Router };

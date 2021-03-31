@@ -12,8 +12,10 @@ const Container = ({container, key}) => {
             <Link to={`/container/${name}`}>
                 <h2>{name}</h2>
             </Link>
-            <Status state={container.State} id={container.Id} />
-            <Serve ports={container.Ports} id={container.Id} name={name} />
+            <div className='container-controls'>
+                <Status state={container.State} id={container.Id} />
+                <Serve ports={container.Ports} id={container.Id} name={name} />
+            </div>
         </div>
     )
 }

@@ -94,6 +94,12 @@ body {
   justify-content: space-between;
 }
 
+.container-controls {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+
 .form {
   display: flex;
   align-items: center;
