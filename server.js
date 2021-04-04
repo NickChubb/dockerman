@@ -11,11 +11,11 @@ const {Router, Database} = require('./objects.js');
  * Connect to Service DB
  */
 
- let db = new Database();
+ const db = new Database();
  db.sync();
 
 /**
  * Express Routing
  */
 
-let routes = new Router();
+ const router = new Router();

@@ -7,14 +7,14 @@ import Button from './Button.js';
 
 const Serve = ({ ports, id, name }) => {
 
-    let defaultPort = "0000";
+    let defaultPort = ports[0] ? ports[0].PublicPort : "0000";
 
     const [enabled, setEnabled] = useState(false);
     const [slug, setSlug] = useState('');
     const [port, setPort] = useState(defaultPort);
 
     useEffect(() => {
-        getService(id).then(service => {
+        getService(name).then(service => {
             setSlug(service.slug);
             setEnabled(service.served);
         });
@@ -23,7 +23,7 @@ const Serve = ({ ports, id, name }) => {
 
     const handleSubmit = (evt) => {
         evt.preventDefault();
-        updateService(id, enabled, slug, port);
+        updateService(name, enabled, slug, port);
     }
 
     return (
@@ -33,7 +33,7 @@ const Serve = ({ ports, id, name }) => {
                     type="switch" 
                     className="mb-2 mr-sm-2" 
                     label="Serve"
-                    id={"on-switch-" + id}
+                    id={"on-switch-" + name}
                     onChange={e => {
                         setEnabled(e.target.checked);
                     }}
@@ -45,7 +45,7 @@ const Serve = ({ ports, id, name }) => {
                     type="switch" 
                     className="mb-2 mr-sm-2" 
                     label="Serve"
-                    id={"on-switch-" + id}
+                    id={"on-switch-" + name}
                     onChange={e => {
                         setEnabled(e.target.checked);
                     }}

@@ -4,6 +4,7 @@ const path = require('path');
 const proxy = require('express-http-proxy')
 const Sequelize =  require('sequelize');
 const moment = require('moment');
+const { filterInPlace } = require('./lib/helpers.js');
 
 class Database  {
 
@@ -22,11 +23,10 @@ class Database  {
         * 
         */
         this.services = this.sequelize.define('services', {
-            id: {
+            name: {
                 type: Sequelize.STRING,
                 primaryKey: true
             }, // From Docker
-            name: Sequelize.STRING, // From Docker
             description: Sequelize.TEXT, // Not sure...
             path: Sequelize.STRING, // From Docker, absolute path of repo
             served: Sequelize.BOOLEAN, // From service -> Path being served
@@ -57,22 +57,21 @@ class Database  {
     /**
      * Get list of all events from Events collection in Database
      */
-    async getService(id) {
-        const service = await this.services.findOne({ where: { id: id } });
+    async getService(name) {
+        const service = await this.services.findOne({ where: { name: name } });
         return service;
     }
 
     async addContainer(container) {
         
-        let id = container.Id;
-        let name = container.Names[0];
+        let name = container.Names[0].substring(1);
         let description = "";
         let path = "";
         let served = false;
         let slug = '';
         let port = '';
 
-        this.addService(id, name, description, path, served, slug, port)
+        this.addService(name, description, path, served, slug, port)
             .catch(err => {
                 console.log(`🗄💥 Container ${name} is already in db.`);
             });
@@ -81,13 +80,12 @@ class Database  {
     /**
      * Add event to Events collection in Database
      */
-    async addService(id, name, description, path, served, slug, port) {
+    async addService(name, description, path, served, slug, port) {
 
         // Get date
         var now = moment();
 
         const newService = await this.services.create({
-            id: id,
             name: name,
             description: description,
             path: path,
@@ -100,7 +98,7 @@ class Database  {
         console.log("🗄 Added new service to DB.");
 
         this.router = new Routes();
-        this.routes.sync();
+        this.router.sync();
 
         return newService;
     }
@@ -108,9 +106,9 @@ class Database  {
     /**
         Update service description.
      */
-    async updateDescription(id, description) {
+    async updateDescription(name, description) {
 
-        let service = await this.getService(id);
+        let service = await this.getService(name);
         service.description = description;
         service.save();
 
@@ -121,25 +119,25 @@ class Database  {
         Update service served, slug, and port fields.
         To be used when the form is changed.
      */
-    async updateService(id, served, slug, port) {
+    async updateService(name, served, slug, port) {
 
-        let service = await this.getService(id);
+        let service = await this.getService(name);
         service.served = served;
         service.slug = slug;
         service.port = port;
         service.save();
 
-        console.log(`🗄🔄 Updated ${service.name} to served: ${served}, slug: ${slug}, port: ${port}.`);
+        console.log(`🗄🔄 Updated ${name} to served: ${served}, slug: ${slug}, port: ${port}.`);
 
-        this.router = new Routes();
-        this.routes.sync();
+        this.router = new Router();
+        this.router.sync();
     }
 
     /**
      * Remove event by ID from Events collection in Database
      */
-    async deleteService(id) {
-        const rowCount = await this.services.destroy({ where: { id: id } });
+    async deleteService(name) {
+        const rowCount = await this.services.destroy({ where: { name: name } });
         if (!rowCount) return '```diff\n- ERROR: That event does not exist.\n```';
 
         console.log(`🗄❌ Removed service from DB.`);
@@ -166,8 +164,17 @@ class Router {
         this.app.use(bodyParser.urlencoded({ extended: false }));
         this.app.use(bodyParser.json());
 
-        this.app.use(express.static(path.join(__dirname + "/build")));
-        this.app.use("/api", require('./lib/api.js'));
+        this.app.use("/dockerman", express.static(path.join(__dirname + "/build")));
+        this.app.use("/dockerman/api", require('./lib/api.js'));
+
+
+        // this.app.get("/dockerman", (req, res) => {
+        //             res.sendFile(__dirname + "/build/index.html");
+        //         });
+
+        this.app.get("/dockerman/*", (req, res) => {
+            res.sendFile(__dirname + "/build/index.html");
+        });
 
         this.sync();
 
@@ -182,19 +189,26 @@ class Router {
         Sync the routes served with the services from the db
      */
     sync() {
+
+        // Filter out proxied services from the router stack
+        this.app._router.stack.forEach( (layer, i) => {
+            if (layer.name === 'handleProxy')
+            {
+                this.app._router.stack.splice(i, i + 1);
+            }
+        })
+
+        // Add proxies from the db
+        // Array is filtered for services being served, then sorted and reversed 
+        // to make sure empty string is the last endpoint served.
         this.db.getServices().then( services => {
             services.filter( service => service.served)
+                .sort()
+                .reverse()
                 .forEach( service => {
-                    let name = service.name;
-                    let port = service.port;
-                    let slug = service.slug;
-                    console.log(`🕸 serving ${name} on port:${port} at nickchubb.ca/${slug}`);
-                    this.app.use('/' + slug, proxy('localhost:' + port))
+                    console.log(`🕸 serving ${service.name} on port:${service.port} at nickchubb.ca/${service.slug}`);  
+                    this.app.use('/' + service.slug, proxy('localhost:' + service.port))
                 });
-                
-                this.app.get("/*", (req, res) => {
-                    res.sendFile(__dirname + "/build/index.html");
-                })
         })
     }
 
