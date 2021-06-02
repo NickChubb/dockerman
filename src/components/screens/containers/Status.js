@@ -1,6 +1,6 @@
-import Button from './Button';
+import Button from '../../Button';
 import { useState, useEffect } from 'react';
-import { startContainer, stopContainer, removeContainer, fetchContainerInfo } from './api/container';
+import { startContainer, stopContainer, removeContainer, fetchContainerInfo } from '../../api/container';
 
 
 const Status = ({ containerState, id }) => {

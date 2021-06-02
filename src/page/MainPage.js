@@ -1,5 +1,5 @@
 import React from 'react';
-import Display from '../components/Display.js';
+import Display from '../components/screens/Display.js';
 
 const MainPage = () => {
     return (

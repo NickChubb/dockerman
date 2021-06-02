@@ -12,8 +12,8 @@ const ContainerPage = () => {
     return (
         <div className='display'>
             <h2>{containerId}</h2>
-            <InfoField title="Ports" />
-            <h3>Logs</h3>
+            {/* <InfoField title="Ports" /> */}
+            {/* <h3>Logs</h3> */}
 
         </div>
     )

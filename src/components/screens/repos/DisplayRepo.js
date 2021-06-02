@@ -1,5 +1,5 @@
 import Repos from './Repos.js';
-import Button from './Button.js';
+import Button from '../../Button.js';
 import { Link } from 'react-router-dom';
 
 
@@ -24,6 +24,7 @@ const DisplayRepo = () => {
                 <Link to="/" className="unfocused">Containers</Link>
                 <Link to="/images" className="unfocused">Images</Link>
                 <span className="subpage-header">Repo</span>
+                <Link to="/config" className="unfocused">Config</Link>
             </h2>
             <h3 className="topbar">
                 <Button text="Add new Container" onClick={() => alert("adding new container")}/>

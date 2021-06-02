@@ -1,6 +1,6 @@
 import Containers from './Containers.js';
-import Button from './Button.js';
-import { fetchContainers } from './api/container';
+import Button from '../../Button.js';
+import { fetchContainers } from '../../api/container';
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
@@ -23,6 +23,7 @@ const DisplayContainers = () => {
                 <span className="subpage-header">Containers</span>
                 <Link to="/images" className="unfocused">Images</Link>
                 <Link to="/repo" className="unfocused">Repo</Link>
+                <Link to="/config" className="unfocused">Config</Link>
             </h2>
             <h3 className="topbar">
                 <Button text="prune -a" />

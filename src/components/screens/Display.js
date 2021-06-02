@@ -1,7 +1,8 @@
-import DisplayContainers from './DisplayContainers.js';
-import DisplayImages from './DisplayImages.js';
-import DisplayRepo from './DisplayRepo.js';
-import DisplayNew from './DisplayNew.js';
+import DisplayContainers from './containers/DisplayContainers.js';
+import DisplayImages from './images/DisplayImages.js';
+import DisplayRepo from './repos/DisplayRepo.js';
+import DisplayNew from './repos/DisplayNew.js';
+import DisplayConfig from './config/DisplayConfig.js';
 import { Switch, Route } from 'react-router-dom';
 
 const Display = () => {
@@ -20,6 +21,10 @@ const Display = () => {
 
                 <Route path="/new">
                     <DisplayNew />
+                </Route>
+
+                <Route path="/config">
+                    <DisplayConfig />
                 </Route>
 
                 <Route path="/">

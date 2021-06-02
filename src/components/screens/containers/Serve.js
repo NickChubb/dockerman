@@ -2,8 +2,8 @@
 import { useState, useEffect } from 'react';
 import { Form, Row, Col, InputGroup, FormControl } from 'react-bootstrap';
 import { useHistory } from "react-router-dom";
-import { updateService, getService } from './api/db.js';
-import Button from './Button.js';
+import { updateService, getService } from '../../api/db.js';
+import Button from '../../Button.js';
 
 const Serve = ({ ports, id, name }) => {
 
