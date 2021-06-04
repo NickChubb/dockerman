@@ -3,12 +3,14 @@ import { useState, useEffect } from 'react';
 import { Form, Row, Col, InputGroup, FormControl } from 'react-bootstrap';
 import { useHistory } from "react-router-dom";
 import { updateService, getService } from '../../api/db.js';
+import { fetchConfig } from '../../api/system.js';
 import Button from '../../Button.js';
 
 const Serve = ({ ports, id, name }) => {
 
     let defaultPort = ports[0] ? ports[0].PublicPort : "0000";
-
+    
+    const [domainName, setDomainName] = useState('');
     const [enabled, setEnabled] = useState(false);
     const [slug, setSlug] = useState('');
     const [port, setPort] = useState(defaultPort);
@@ -18,6 +20,10 @@ const Serve = ({ ports, id, name }) => {
             setSlug(service.slug);
             setEnabled(service.served);
         });
+
+	fetchConfig().then(config => {
+	    setDomainName(config.domain.domainName);
+	});
 
     }, []);
 
@@ -68,7 +74,7 @@ const Serve = ({ ports, id, name }) => {
             on
             <InputGroup>
                 <InputGroup.Prepend>
-                    <InputGroup.Text>nickchubb.ca/</InputGroup.Text>
+                    <InputGroup.Text>{domainName}/</InputGroup.Text>
                 </InputGroup.Prepend>
                 {enabled 
                     ? 
@@ -84,7 +90,7 @@ const Serve = ({ ports, id, name }) => {
                 
             </InputGroup>
             
-            <Button variant="primary" color="dodgerblue" type="submit" text="update" />    
+                 
             
         </Form>
     )
