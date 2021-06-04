@@ -1,0 +1,15 @@
+{
+  "auth": {
+    "useAuth": false,
+    "username": "admin",
+    "password": "admin"
+  },
+  "domain": {
+    "domainName": "mydomainname.com"
+  },
+  "security": {
+    "alertIncorrectLogin": true,
+    "alertSuccessfulLogin": false,
+    "emailAddress": "admin@mydomainname.com"
+  }
+}
