@@ -43,6 +43,19 @@ body {
   margin-bottom: 20px;
 }
 
+.form-parameter {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;  
+  margin-top: 10px;
+  margin-bottom: 10px;
+
+}
+
+.form-entry {
+  max-width: 70%;
+}
+
 .btn {
   display: inline-block;
   background: #000;

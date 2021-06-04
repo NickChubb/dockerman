@@ -2,11 +2,13 @@ import React, { useState, useEffect } from 'react';
 import ConfigGroup from "./ConfigGroup.js";
 import { fetchConfig, updateConfig } from "../../api/system";
 import Button from '../../Button';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import { Form, Row, Col, InputGroup, FormControl } from 'react-bootstrap';
 
 
 const DisplayConfig = () => {
+
+    let history = useHistory();
 
     const [config, setConfig] = useState();
 
@@ -57,6 +59,7 @@ const DisplayConfig = () => {
 
         // console.log(JSON.stringify(newConfig));
         updateConfig(newConfig);
+        history.push('/');
     }
 
     return (
