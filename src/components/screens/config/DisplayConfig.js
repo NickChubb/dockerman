@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import ConfigGroup from "./ConfigGroup.js";
-import { fetchConfig } from "../../api/system";
+import { fetchConfig, updateConfig } from "../../api/system";
 import Button from '../../Button';
 import { Link } from 'react-router-dom';
+import { Form, Row, Col, InputGroup, FormControl } from 'react-bootstrap';
+
 
 const DisplayConfig = () => {
 
@@ -17,6 +19,46 @@ const DisplayConfig = () => {
         getConfig();
     }, []);
 
+    const handleSubmit = (evt) => {
+        evt.preventDefault();
+
+        let newConfig = config;
+
+        console.log(JSON.stringify(newConfig));
+
+        // process evt target values to update new config.
+        Object.entries(evt.target).forEach(( [index, param] ) => {
+            // console.log(param.value);
+
+            let name = param.name;
+            let value = param.value;
+
+            if ( typeof  value != "undefined" && name != "") {
+                
+                console.log(name + ": " + value);
+
+                // Get config groups
+                Object.entries(newConfig).forEach(( [groupTitle, configGroup] ) => {
+                    
+                    console.log("groupTitle: " + groupTitle);
+
+                    // Search config group for key that matches
+                    Object.entries(configGroup).forEach(( [paramName, paramValue] ) => {
+                        console.log("paramName: " + paramName + " == name: " + name);
+                        if ( paramName == name ) {
+
+                            console.log("Attemping to set paramValue to: " + value);
+                            newConfig[groupTitle][paramName] = value;
+                        }
+                    })
+                })
+            }
+        });
+
+        // console.log(JSON.stringify(newConfig));
+        updateConfig(newConfig);
+    }
+
     return (
         <>
             <h2>
@@ -26,17 +68,18 @@ const DisplayConfig = () => {
                 <span className="subpage-header">Config</span>
             </h2>
             <h3 className="topbar">
-                <Button text="save"/>
+                {/* <Button text="save" onClick={handleSubmit}/> */}
             </h3>
-            <div>
+            <Form onSubmit={handleSubmit}>
+                <Button variant="primary" color="dodgerblue" name="submit" type="submit" text="save" />   
                 { typeof config == "undefined" ?
-                    <div />
+                    <div className='container'>ERROR: config file not found.</div>
                     : 
-                    Object.entries(config).map(([groupTitle, configGroup]) => (
-                        <ConfigGroup groupTitle={groupTitle} configGroup={configGroup} />
+                    Object.entries(config).map(( [groupTitle, configGroup] ) => (
+                        <ConfigGroup setConfig={setConfig} groupTitle={groupTitle} configGroup={configGroup} />
                     ))
                 }
-            </div>
+            </Form>
         </>
     )
 }

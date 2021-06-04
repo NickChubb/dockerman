@@ -16,15 +16,15 @@ export const fetchDockerVersion = async () => {
     return data;
 }
 
-// Fetch docker version from API and return it
+// Fetch config JSON file from the server
 export const fetchConfig = async () => {
     let res = await fetch(`${homepage}/api/sys/config`);
     let data = await res.json();
     return data;
 }
 
-// Fetch docker version from API and return it
-export const setConfig = async (config) => {
+// Set the config JSON file in the server
+export const updateConfig = async (config) => {
 
     let res = await fetch(`${homepage}/api/sys/config`, {
         method: 'POST',

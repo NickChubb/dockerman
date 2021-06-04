@@ -1,18 +1,19 @@
 import { Form, Row, Col, InputGroup, FormControl } from 'react-bootstrap';
 
-const TextParameter = ({ param, value }) => {
+const TextParameter = ({ setConfig, param, value }) => {
 
     return (
         <InputGroup>
-        {param}
-        <FormControl 
-                id={param}
-                value={value}
-                onChange={e => {
-                    alert(e.target.value);
-                }} 
-            /> 
-    </InputGroup>
+            {param}
+            <FormControl 
+                    id={param}
+                    name={param}
+                    defaultValue={value}
+                    onChange={e => {
+                        
+                    }} 
+                /> 
+        </InputGroup>
     )
 }
 

@@ -1,0 +1,17 @@
+{
+    "auth":
+    {
+        "username": "admin",
+        "password": "civic"
+    },
+    "domain":
+    {
+	    "domainName": "nickchubb.ca"
+    },
+    "security":
+    {
+        "alertIncorrectLogin": true,
+        "alertSuccessfulLogin": false,
+	    "emailAddress": "nick@nickchubb.ca"
+    }
+}

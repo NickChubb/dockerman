@@ -2,24 +2,26 @@ import { Form, Row, Col, InputGroup, FormControl } from 'react-bootstrap';
 import TextParameter from './TextParameter.js';
 import BoolParameter from './BoolParameter.js';
 
-const ConfigGroup = ({ param, value }) => {
+const ConfigGroup = ({ setConfig, param, value }) => {
 
+    // Depending on the type of value for the config parameter,
+    // Gets a different component which handles the different cases.
     const getValueType = ( param, value ) => {
 
         switch ( typeof value ) {
             case "string" :
-                return (<TextParameter param={param} value={value} />);
+                return (<TextParameter setConfig={setConfig} param={param} value={value} />);
             case "boolean": 
-                return (<BoolParameter param={param} value={value} />);
+                return (<BoolParameter setConfig={setConfig} param={param} value={value} />);
             default:
                 break;
         }
     }
 
     return (
-        <Form className="form" inline>
-            { this.getValueType(param, value) }
-        </Form>
+        <>
+            { getValueType(param, value) }
+        </>
     )
 }
 
