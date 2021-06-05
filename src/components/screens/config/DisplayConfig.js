@@ -37,19 +37,24 @@ const DisplayConfig = () => {
 
             if ( typeof  value != "undefined" && name != "") {
                 
-                console.log(name + ": " + value);
+                // console.log(name + ": " + value);
 
                 // Get config groups
                 Object.entries(newConfig).forEach(( [groupTitle, configGroup] ) => {
                     
-                    console.log("groupTitle: " + groupTitle);
+                    // console.log("groupTitle: " + groupTitle);
 
                     // Search config group for key that matches
                     Object.entries(configGroup).forEach(( [paramName, paramValue] ) => {
-                        console.log("paramName: " + paramName + " == name: " + name);
+                        // console.log("paramName: " + paramName + " == name: " + name);
                         if ( paramName == name ) {
 
+                            if ( typeof paramValue == "boolean") {
+                                value = param.value === 'true';
+                            }
+
                             console.log("Attemping to set paramValue to: " + value);
+                            // console.log(typeof value );
                             newConfig[groupTitle][paramName] = value;
                         }
                     })
