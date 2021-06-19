@@ -19,7 +19,7 @@ const LoginPage = ({ setToken }) => {
 
     return (
         <div className='display'>
-            <h2>Please Log In</h2>
+            <h1>Please Log In</h1>
             <form className='login-form' onSubmit={handleSubmit}>
                 <label className='login-element'>
                     <p>Username</p>
