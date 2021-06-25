@@ -22,3 +22,11 @@ Updating frequently.
 
 - Admin username and password required to log in for security
 - Config screen to simply change configuration settings
+
+## Coming Soon (when I have time)
+
+- Deploy programs as containers based on Docker scripts
+- Updating config screen to be more user friendly
+- Display more server information (memory, storage, etc.)
+- Major React refactors to make different screens work consistently
+- Demo dockerman app
