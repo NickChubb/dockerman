@@ -25,6 +25,7 @@ Updating frequently.
 
 ## Coming Soon (when I have time)
 
+- Additional security features (Email to admin on unsuccessful login attempt, timeouts after too many login attempts, etc.)
 - Deploy programs as containers based on Docker scripts
 - Updating config screen to be more user friendly
 - Display more server information (memory, storage, etc.)
