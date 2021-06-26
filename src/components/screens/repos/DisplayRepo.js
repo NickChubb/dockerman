@@ -1,7 +1,6 @@
 import Repos from './Repos.js';
 import Button from '../../Button.js';
-import { Link } from 'react-router-dom';
-
+import Tabs from '../Tabs.js';
 
 
 const DisplayRepo = () => {
@@ -20,12 +19,7 @@ const DisplayRepo = () => {
 
     return (
         <>
-            <h2>
-                <Link to="/" className="unfocused">Containers</Link>
-                <Link to="/images" className="unfocused">Images</Link>
-                <span className="subpage-header">Repo</span>
-                <Link to="/config" className="unfocused">Config</Link>
-            </h2>
+            <Tabs page="Repo" />
             <h3 className="topbar">
                 <Button text="Add new Container" onClick={() => alert("adding new container")}/>
             </h3>

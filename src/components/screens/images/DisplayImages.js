@@ -2,7 +2,7 @@ import Images from './Images.js';
 import Button from '../../Button.js';
 import { fetchImages, pruneImages } from '../../api/image';
 import { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import Tabs from '../Tabs.js';
 
 const DisplayImages = () => {
 
@@ -19,12 +19,7 @@ const DisplayImages = () => {
 
     return (
         <>
-            <h2>
-                <Link to="/" className="unfocused">Containers</Link>
-                <span className="subpage-header">Images</span>
-                <Link to="/repo" className="unfocused">Repo</Link>
-                <Link to="/config" className="unfocused">Config</Link>
-            </h2>
+            <Tabs page="Images" />
             <h3 className="topbar">
                 <Button text="prune -a" onClick={() => pruneImages()}/>
             </h3>

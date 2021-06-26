@@ -2,7 +2,7 @@ import Containers from './Containers.js';
 import Button from '../../Button.js';
 import { fetchContainers } from '../../api/container';
 import { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import Tabs from '../Tabs.js';
 
 const DisplayContainers = () => {
 
@@ -19,12 +19,7 @@ const DisplayContainers = () => {
 
     return (
         <>
-            <h2>
-                <span className="subpage-header">Containers</span>
-                <Link to="/images" className="unfocused">Images</Link>
-                <Link to="/repo" className="unfocused">Repo</Link>
-                <Link to="/config" className="unfocused">Config</Link>
-            </h2>
+            <Tabs page="Containers" />
             <h3 className="topbar">
                 <Button text="prune -a" />
                 <Button text="restart all" />

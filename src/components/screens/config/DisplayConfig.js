@@ -4,6 +4,7 @@ import { fetchConfig, updateConfig } from "../../api/system";
 import Button from '../../Button';
 import { Link, useHistory } from 'react-router-dom';
 import { Form, Row, Col, InputGroup, FormControl } from 'react-bootstrap';
+import Tabs from '../Tabs.js';
 
 
 const DisplayConfig = () => {
@@ -69,12 +70,7 @@ const DisplayConfig = () => {
 
     return (
         <>
-            <h2>
-                <Link to="/" className="unfocused">Containers</Link>
-                <Link to="/images" className="unfocused">Images</Link>
-                <Link to="/repo" className="unfocused">Repo</Link>
-                <span className="subpage-header">Config</span>
-            </h2>
+            <Tabs page="Config" />
             <h3 className="topbar">
                 {/* <Button text="save" onClick={handleSubmit}/> */}
             </h3>
