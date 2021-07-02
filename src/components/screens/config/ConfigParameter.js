@@ -9,12 +9,13 @@ const ConfigGroup = ({ setConfig, param, value }) => {
     const getValueType = ( param, value ) => {
 
         switch ( typeof value ) {
-            case "string" :
+            case "number":
+            case "string":
                 return (<TextParameter setConfig={setConfig} param={param} value={value} />);
             case "boolean": 
                 return (<BoolParameter setConfig={setConfig} param={param} value={value} />);
             default:
-                break;
+                return (<p>ERROR: Improperly formatted config option.</p>)
         }
     }
 

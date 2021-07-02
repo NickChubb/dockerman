@@ -50,8 +50,13 @@ const DisplayConfig = () => {
                         // console.log("paramName: " + paramName + " == name: " + name);
                         if ( paramName == name ) {
 
-                            if ( typeof paramValue == "boolean") {
+                            if ( typeof paramValue == "boolean" ) {
+                                // Case for parameter is boolean
                                 value = param.value === 'true';
+                                
+                            } else if ( typeof paramValue == "number" ) {
+                                // Case for parameter is number
+                                value = parseInt(param.value);
                             }
 
                             console.log("Attemping to set paramValue to: " + value);

@@ -14,7 +14,10 @@ const LoginPage = ({ setToken }) => {
             username,
             password
         });
-        setToken(token);
+        
+        if (token) {
+            setToken(token);
+        }
     }
 
     return (

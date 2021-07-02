@@ -11,11 +11,13 @@ export const loginUser = async (credentials) => {
         body: JSON.stringify(credentials)
     });
 
-    let status = response.status;
-    if (status != 200){
-        alert('ERROR: invalid credentials.');
-    }
-
     let data = await response.json();
-    return data;
+    let status = response.status;
+
+    if (status != 200){
+        alert(data.error);
+        return false;
+    } else {
+        return data;
+    }
 }
