@@ -22,6 +22,7 @@ Updating frequently.
 
 - Admin username and password required to log in for security
 - Config screen to simply change configuration settings
+- Custom timeouts for too many incorrect login attempts
 
 ## Coming Soon (when I have time)
 
