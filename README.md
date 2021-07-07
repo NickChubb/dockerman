@@ -24,6 +24,25 @@ Updating frequently.
 - Config screen to simply change configuration settings
 - Custom timeouts for too many incorrect login attempts
 
+## Config
+
+### auth
+
+- **username:** Admin login username
+- **password:** Admin login password
+
+### domain
+
+- **domainName:** Root domain name the app is being hosted on
+
+### security
+
+- **alertIncorrectLogin:** Send email to admin email address (emailAddress) upon unsuccessful login attempt
+- **alertSuccessfulLogin:** Send email to admin email address (emailAddress) upon successful login attempt
+- **emailAddress:** Email address to be alerted with updates
+- **maxLoginAttempts:** Maximum incorrect login attempts before timing out login
+- **loginTimeout:** Length of time in seconds (s) to timeout upon exceeding maxLoginAttempts
+
 ## Coming Soon (when I have time)
 
 - Additional security features (Email to admin on unsuccessful login attempt, timeouts after too many login attempts, etc.)
