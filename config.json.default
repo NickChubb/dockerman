@@ -1,6 +1,5 @@
 {
   "auth": {
-    "useAuth": false,
     "username": "admin",
     "password": "admin"
   },

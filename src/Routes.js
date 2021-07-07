@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { Switch, Route } from 'react-router-dom';
 import useToken from './components/useToken';
 
@@ -23,16 +23,16 @@ const Routes = () => {
 
     return (
     <Switch>
-        
-        <Route path="/container/:containerId">
-          <ContainerPage />
-        </Route>
 
-        <Route path="/">
-          <MainPage />
-        </Route>
+      <Route path="/container/:containerId">
+        <ContainerPage />
+      </Route>
 
-      </Switch>
+      <Route path="/">
+        <MainPage />
+      </Route>
+
+    </Switch>
     )
 }
 
