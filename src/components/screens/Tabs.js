@@ -8,6 +8,7 @@ const Tabs = ({page}) => {
             <ToggleLink to="/images" title="Images" page={page} />
             <ToggleLink to="/" title="Repo" page="DISABLED" /> 
             <ToggleLink to="/config" title="Config" page={page} />
+            <ToggleLink to="/log" title="Log" page={page} />
         </h2>
     )
 }

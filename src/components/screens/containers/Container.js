@@ -13,8 +13,8 @@ const Container = ({container, key}) => {
                 <h2>{name}</h2>
             </Link>
             <div className='container-controls'>
-                <Status state={container.State} id={container.Id} />
-                <Serve ports={container.Ports} id={container.Id} name={name} />
+                <Status state={container.State} id={name} />
+                <Serve ports={container.Ports} id={name} name={name} />
             </div>
         </div>
     )

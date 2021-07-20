@@ -20,7 +20,10 @@ class Database  {
         });
         
         /*
-        * 
+        *   Defines the database for services (containers) to be served.
+        *
+        *   Services are added to the database the first time they are detected and the 
+        *   port on which they are served are remembered across container restarts
         */
         this.services = this.sequelize.define('services', {
             name: {
@@ -34,6 +37,19 @@ class Database  {
             port: Sequelize.STRING, // From service -> port to serve at slug
             created: Sequelize.DATE // 
         });
+
+        /*
+        *   Defines the database for log entries
+        */
+        this.log = this.sequelize.define('log', {
+            id: {
+                type: Sequelize.UUID,
+                defaultValue: Sequelize.UUIDV4,
+                primaryKey: true
+            },
+            time: Sequelize.DATE,
+            message: Sequelize.STRING
+        });
     }
 
     /**
@@ -41,6 +57,7 @@ class Database  {
      */
     sync() {
         this.services.sync();
+        this.log.sync();
     }
 
     /**
@@ -48,9 +65,6 @@ class Database  {
      */
     async getServices() {
         const services = await this.services.findAll({ order: [['created', 'DESC']] });
-        services.forEach(service => {
-            console.log(`${service.name}, ${service.served}, ${service.slug}, ${service.port}`);
-        })
         return services;
     }
 
@@ -142,6 +156,35 @@ class Database  {
 
         console.log(`🗄❌ Removed service from DB.`);
         return '```diff\n+ Event successfully deleted.\n```';
+    }
+
+    // Adds new log entry to the log db
+    async addLogEntry(message) {
+
+        // get time
+        var now = moment();
+
+        const newLogEntry = await this.log.create({
+            time: now,
+            message: message
+        });
+
+        db.sync();
+        return newLogEntry;
+    }
+
+    // Returns all log entries
+    async getLog() {
+        const log = await this.log.findAll({ order: [['time', 'DESC']] });
+        return log;
+    }
+
+    // Deletes all log entries
+    async clearLog() {
+        this.log.destroy({
+            where: {},
+            truncate: true
+          })
     }
 }
 

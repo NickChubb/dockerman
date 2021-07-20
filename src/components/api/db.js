@@ -26,3 +26,21 @@ export const updateService = async (name, served, slug, port) => {
 
     return res.status;
 }
+
+export const fetchLog = async () => {
+
+    let res = await fetch(`${homepage}/api/db/log`)
+    let data = await res.json();
+    
+    return data;
+}
+
+export const clearLog = async () => {
+
+    let res = await fetch(`${homepage}/api/db/log`, {
+        method: 'DELETE'
+    })
+
+    let data = await res.json();
+    return data;
+}
