@@ -169,7 +169,7 @@ class Database  {
             message: message
         });
 
-        db.sync();
+        this.sync();
         return newLogEntry;
     }
 

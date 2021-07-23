@@ -12,5 +12,9 @@
     "emailAddress": "admin@mydomainname.com",
     "maxLoginAttempts": 3,
     "loginTimeout": 60
+  },
+  "log": {
+    "entriesPerPage": 50,
+    "cycleLogsMinutes": 0
   }
 }

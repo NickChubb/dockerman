@@ -1,6 +1,7 @@
 import Button from '../../Button';
 import { useState, useEffect } from 'react';
-import { startContainer, stopContainer, removeContainer, fetchContainerInfo } from '../../api/container';
+import { startContainer, stopContainer, removeContainer,
+         restartContainer, fetchContainerInfo } from '../../api/container';
 
 
 const Status = ({ containerState, id }) => {
@@ -70,7 +71,7 @@ const Status = ({ containerState, id }) => {
     const restartOnClick = async (id) => {
         const expected = "running";
 
-        // removeContainer(id); 
+        restartContainer(id); 
         let status = await getContainerState(expected);
 
         if (status != expected) {
