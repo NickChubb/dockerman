@@ -1,6 +1,7 @@
 import DisplayContainers from './containers/DisplayContainers.js';
 import DisplayImages from './images/DisplayImages.js';
 import DisplayRepo from './repos/DisplayRepo.js';
+import DisplayGit from './git/DisplayGit.js';
 import DisplayLog from './log/DisplayLog.js';
 import DisplayNew from './repos/DisplayNew.js';
 import DisplayConfig from './config/DisplayConfig.js';
@@ -16,8 +17,8 @@ const Display = () => {
                     <DisplayImages />
                 </Route>
 
-                <Route path="/repo">
-                    <DisplayRepo />
+                <Route path="/git">
+                    <DisplayGit />
                 </Route>
 
                 <Route path="/log">

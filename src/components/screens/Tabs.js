@@ -6,7 +6,7 @@ const Tabs = ({page}) => {
         <h2>
             <ToggleLink to="/" title="Containers" page={page} />
             <ToggleLink to="/images" title="Images" page={page} />
-            <ToggleLink to="/" title="Repo" page="DISABLED" /> 
+            <ToggleLink to="/git" title="Git" page={page} /> 
             <ToggleLink to="/config" title="Config" page={page} />
             <ToggleLink to="/log" title="Log" page={page} />
         </h2>
