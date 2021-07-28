@@ -5,6 +5,7 @@ import { useHistory } from "react-router-dom";
 import { updateService, getService } from '../../api/db.js';
 import { fetchConfig } from '../../api/system.js';
 import Button from '../../Button.js';
+import { AiOutlineLink } from 'react-icons/ai';
 
 const Serve = ({ ports, id, name }) => {
 
@@ -30,6 +31,10 @@ const Serve = ({ ports, id, name }) => {
     const handleSubmit = (evt) => {
         evt.preventDefault();
         updateService(name, enabled, slug, port);
+    }
+
+    const getLink = () => {
+        return `https://${domainName}/${slug}/`;
     }
 
     return (
@@ -90,7 +95,7 @@ const Serve = ({ ports, id, name }) => {
                 
             </InputGroup>
             
-                 
+            <a href={getLink()} target="_blank"><AiOutlineLink /></a>
             
         </Form>
     )
