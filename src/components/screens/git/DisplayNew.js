@@ -16,13 +16,13 @@ const DisplayNew = () => {
 
     const handleSubmit = (evt) => {
         evt.preventDefault();
-        history.push('/');
+        history.push('/git');
     } 
 
     return (
         <Form onSubmit={handleSubmit} className="form">
 
-            <h2>Add Container</h2>
+            <h2>Add Git Repo</h2>
             <hr />
 
             <Form.Group controlId="formTitle">

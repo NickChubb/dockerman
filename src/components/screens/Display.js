@@ -1,9 +1,8 @@
 import DisplayContainers from './containers/DisplayContainers.js';
 import DisplayImages from './images/DisplayImages.js';
-import DisplayRepo from './repos/DisplayRepo.js';
-import DisplayGit from './git/DisplayGit.js';
+import GitRoutes from './git/GitRoutes.js';
 import DisplayLog from './log/DisplayLog.js';
-import DisplayNew from './repos/DisplayNew.js';
+import DisplayNew from './git/DisplayNew.js';
 import DisplayConfig from './config/DisplayConfig.js';
 import { Switch, Route } from 'react-router-dom';
 
@@ -18,7 +17,7 @@ const Display = () => {
                 </Route>
 
                 <Route path="/git">
-                    <DisplayGit />
+                    <GitRoutes />
                 </Route>
 
                 <Route path="/log">

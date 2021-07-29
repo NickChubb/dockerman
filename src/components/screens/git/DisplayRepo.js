@@ -1,7 +1,7 @@
 import Repos from './Repos.js';
 import Button from '../../Button.js';
 import Tabs from '../Tabs.js';
-
+import { Link } from 'react-router-dom';
 
 const DisplayRepo = () => {
 
@@ -19,9 +19,11 @@ const DisplayRepo = () => {
 
     return (
         <>
-            <Tabs page="Repo" />
+            <Tabs page="Git" />
             <h3 className="topbar">
-                <Button text="Add new Container" onClick={() => alert("adding new container")}/>
+                <Link to="/new">
+                    <Button text="Add new Git repo" />
+                </Link>
             </h3>
             <Repos repos={repos} />
         </>
