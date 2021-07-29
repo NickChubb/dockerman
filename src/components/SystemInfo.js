@@ -34,7 +34,9 @@ const SystemInfo = () => {
 
     return (
         <span>
-            <strong>Docker Size:</strong> {formatBytes(dockerInfo.LayersSize)} | <strong>Docker Version:</strong> {version.Version} | 
+            <u>Docker Size:</u> {formatBytes(dockerInfo.LayersSize)} | <u>Docker Version:</u> {version.Version} |<span> </span>
+            <u>Memory:</u> {formatBytes(info.freemem)} / {formatBytes(info.totalmem)} |<span> </span>
+            <u>Disk Space:</u> {formatBytes(info.usedspace)} / {formatBytes(info.totalspace)} ({info.capacityspace})
         </span>
     )
 }
