@@ -1,4 +1,4 @@
-import DisplayContainers from './containers/DisplayContainers.js';
+import ContainersScreen from './containers/ContainersScreen';
 import DisplayImages from './images/DisplayImages.js';
 import DisplayRepo from './repos/DisplayRepo.js';
 import DisplayLog from './log/DisplayLog.js';
@@ -33,7 +33,7 @@ const Display = () => {
                 </Route>
 
                 <Route path="/">
-                    <DisplayContainers />
+                    <ContainersScreen />
                 </Route>
             </Switch>
             

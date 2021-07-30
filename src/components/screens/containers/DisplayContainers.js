@@ -20,7 +20,6 @@ const DisplayContainers = () => {
 
     return (
         <>
-            <Tabs page="Containers" />
             <h3 className="topbar">
                 <Button text="prune -a" onClick={() => pruneContainers()} />
                 <Button text="restart all" onClick={() => restartContainers()} />

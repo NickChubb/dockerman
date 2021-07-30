@@ -24,10 +24,6 @@ const Routes = () => {
     return (
     <Switch>
 
-      <Route path="/container/:containerId">
-        <ContainerPage />
-      </Route>
-
       <Route path="/">
         <MainPage />
       </Route>
