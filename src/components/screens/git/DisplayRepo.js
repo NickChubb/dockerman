@@ -1,27 +1,26 @@
 import Repos from './Repos.js';
 import Button from '../../Button.js';
-import Tabs from '../Tabs.js';
 import { Link } from 'react-router-dom';
+import { getRepos } from '../../api/repo.js';
+import { useState, useEffect } from 'react';
 
 const DisplayRepo = () => {
 
-    // const [repo, setRepo] = useState([]);
+    const [repos, setRepos] = useState([]);
 
-    // useEffect(() => {
-    //     const getRepo = async () => {
-    //         const repoFromServer = await fetchRepo();
-    //         setRepo(repoFromServer);
-    //     }
+    useEffect(() => {
+        const getRepo = async () => {
+            const repoFromServer = await getRepos();
+            setRepos(repoFromServer);
+        }
 
-    //     getRepo();
-    // }, []);
-    const repos = [];
+        getRepo();
+    }, []);
 
     return (
         <>
-            <Tabs page="Git" />
             <h3 className="topbar">
-                <Link to="/new">
+                <Link to="/git/new">
                     <Button text="Add new Git repo" />
                 </Link>
             </h3>

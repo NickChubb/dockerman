@@ -39,6 +39,20 @@ class Database  {
         });
 
         /*
+        *   Defines the database for git repositories
+        */
+        this.repos = this.sequelize.define('repos', {
+            name: {
+                type: Sequelize.STRING,
+                primaryKey: true
+            },
+            url: Sequelize.TEXT,
+            created: Sequelize.DATE
+            // Date last built?
+            // Etc?
+        });
+
+        /*
         *   Defines the database for log entries
         */
         this.log = this.sequelize.define('log', {
@@ -57,6 +71,7 @@ class Database  {
      */
     sync() {
         this.services.sync();
+        this.repos.sync();
         this.log.sync();
     }
 
@@ -157,6 +172,56 @@ class Database  {
         console.log(`🗄❌ Removed service from DB.`);
         return '```diff\n+ Event successfully deleted.\n```';
     }
+
+    /* REPOS */
+
+    // Add repo to database
+    async addRepo(name, url) {
+
+        const newRepo = await this.repos.create({
+            name: name,
+            url: url,
+            created: moment()
+        });
+
+        if (!newRepo) {
+            throw `Could not add repo with name: ${name}`;
+        }
+
+        return newRepo;
+    } 
+
+    // Get all repos from database
+    async getRepos() {
+        const repos = await this.repos.findAll({ order: [['created', 'DESC']] });
+        return repos;
+    }
+
+    // Get repo from database
+    async getRepo(name) {
+
+        const repo = await this.repos.findOne({ where: { name: name } });
+
+        if (!repo) {
+            throw `Could not find repo with name ${name}`;
+        }
+
+        return repo;
+    }
+
+    // Delete repo from database
+    async deleteRepo(name) {
+
+        const rowCount = await this.repos.destroy({ where: { name: name } });
+
+        if (!rowCount) {
+            throw `Could not find repo with name ${name}`;
+        }
+
+        return true;
+    }
+
+    /* LOGS */
 
     // Adds new log entry to the log db
     async addLogEntry(message) {

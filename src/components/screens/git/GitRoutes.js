@@ -9,11 +9,11 @@ const GitRoutes = () => {
     return (
         <Switch>
 
-            <Route path="/new">
+            <Route path="/git/new">
                 <DisplayNew />
             </Route>
 
-            <Route path="/">
+            <Route path="/git">
                 <DisplayRepo />
             </Route>
 

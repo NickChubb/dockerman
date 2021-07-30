@@ -1,6 +1,6 @@
 import DisplayContainers from './containers/DisplayContainers.js';
 import DisplayImages from './images/DisplayImages.js';
-import GitRoutes from './git/GitRoutes.js';
+import GitScreen from './git/GitScreen.js';
 import DisplayLog from './log/DisplayLog.js';
 import DisplayNew from './git/DisplayNew.js';
 import DisplayConfig from './config/DisplayConfig.js';
@@ -17,7 +17,7 @@ const Display = () => {
                 </Route>
 
                 <Route path="/git">
-                    <GitRoutes />
+                    <GitScreen />
                 </Route>
 
                 <Route path="/log">

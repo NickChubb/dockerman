@@ -1,64 +1,45 @@
 import Button from '../../Button';
 import { useState } from 'react';
 import { Form } from 'react-bootstrap';
-import { useHistory } from "react-router-dom";
+import { useHistory, Link } from "react-router-dom";
+import { addRepo } from '../../api/repo.js';
 
 const DisplayNew = () => {
 
     let history = useHistory();
 
-    const [title, setTitle] = useState("");
-    const [description, setDescription] = useState("");
-    const [location, setLocation] = useState("");
-    const [date, setDate] = useState("");
-    const [startTime, setStartTime] = useState("");
-    const [endTime, setEndTime] = useState("");
+    const [url, setUrl] = useState("");
+    const [name, setName] = useState("");
 
     const handleSubmit = (evt) => {
         evt.preventDefault();
+        addRepo(name, url);
         history.push('/git');
     } 
 
     return (
-        <Form onSubmit={handleSubmit} className="form">
+        <Form onSubmit={handleSubmit}>
+            
+            <Button variant="primary" color="dodgerblue" name="add" type="submit" text="add" />
+            <Link to="/git">
+                <Button variant="secondary" color="lightgrey" name="cancel" type="submit" text="cancel" />
+            </Link>
 
-            <h2>Add Git Repo</h2>
-            <hr />
-
-            <Form.Group controlId="formTitle">
-                <Form.Label>Event Title</Form.Label>
-                <Form.Control type="text" value={title} onChange={e => setTitle(e.target.value)} placeholder="Enter Event Title..." />
+            <Form.Group controlId="formUrl">
+                <Form.Label>Github Clone URL</Form.Label>
+                <Form.Control type="text" value={url} onChange={e => setUrl(e.target.value)} placeholder="Enter Github SSH/URL" />
                 <Form.Text className="text-muted">
-                Include your student union's acronym or department name for your respective logo.
+                    Click the code drop-down on the repo you want to clone and paste the SSH link here.
                 </Form.Text>
             </Form.Group>
 
-            <Form.Group controlId="formDescription">
-                <Form.Label>Description</Form.Label>
-                <Form.Control as="textarea" rows={3} value={description} onChange={e => setDescription(e.target.value)} placeholder="Come out to our awesome event where we will.... (Don't forget to include lots of emojis 😎)" />
+            <Form.Group controlId="formName">
+                <Form.Label>Container Name</Form.Label>
+                <Form.Control type="text" value={name} onChange={e => setName(e.target.value)} placeholder="Container Name" />
+                <Form.Text className="text-muted">
+                    Must be unique, cannot match other container which already exists.
+                </Form.Text>
             </Form.Group>
-
-            <Form.Group controlId="formLocation">
-                <Form.Label>Event Location</Form.Label>
-                <Form.Control type="file" value={location} onChange={e => setLocation(e.target.value)} placeholder="Event Location (eg. AQ 9001 or #meeting-room-1)" />
-            </Form.Group>
-            
-            <Form.Group controlId="formDate">
-                <Form.Label>Event Date</Form.Label>
-                <Form.Control type="date" value={date} onChange={e => setDate(e.target.value)} placeholder="" />
-            </Form.Group>
-
-            <Form.Group controlId="formStartTime">
-                <Form.Label>Start Time</Form.Label>
-                <Form.Control type="time" value={startTime} onChange={e => setStartTime(e.target.value)} placeholder="" />
-            </Form.Group>
-
-            <Form.Group controlId="formEndTime">
-                <Form.Label>End Time</Form.Label>
-                <Form.Control type="time" value={endTime} onChange={e => setEndTime(e.target.value)} placeholder="" />
-            </Form.Group>
-
-            <Button variant="primary" color="dodgerblue" type="submit" text="submit" />
         </Form>
     )
 }
