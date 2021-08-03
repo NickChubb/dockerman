@@ -10,7 +10,7 @@ export const errorPopup = (message, error) => {
     })
 }
 
-export const confirmPopup = (message, callback) => {
+export const confirmPopup = (message, promptValue, callback) => {
     return Popup.register({
         title: `Confirm`,
         content: `Are you sure you want to do this?`,

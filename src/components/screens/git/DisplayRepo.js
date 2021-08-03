@@ -1,19 +1,23 @@
 import Repos from './Repos.js';
 import Button from '../../Button.js';
+import Loading from '../../Loading';
 import { Link } from 'react-router-dom';
 import { getRepos } from '../../api/repo.js';
 import { useState, useEffect } from 'react';
 
 const DisplayRepo = () => {
 
-    const [repos, setRepos] = useState([]);
+    const [ isBusy, setBusy ] = useState(true);
+    const [ repos, setRepos ] = useState([]);
+
+    const getRepo = async () => {
+        setBusy(true);
+        const repoFromServer = await getRepos();
+        setRepos(repoFromServer);
+        setBusy(false);
+    }
 
     useEffect(() => {
-        const getRepo = async () => {
-            const repoFromServer = await getRepos();
-            setRepos(repoFromServer);
-        }
-
         getRepo();
     }, []);
 
@@ -24,7 +28,11 @@ const DisplayRepo = () => {
                     <Button text="Add new Git repo" />
                 </Link>
             </h3>
-            <Repos repos={repos} />
+            { isBusy ? (
+                <Loading />
+              ) : (
+                <Repos repos={repos} />
+              )}
         </>
     )
 }
