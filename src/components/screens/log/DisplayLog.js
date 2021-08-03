@@ -20,17 +20,19 @@ const DisplayLog = () => {
         getLog();
     }, []);
 
+    const onClearClick = () => {
+        clearLog().then((data) => {
+            getLog();
+        });
+    }
+
     return (
         <>
             <Tabs page="Log" />
             <h3 className="topbar">
-                <Button text="clear logs" onClick={() => clearLog()} />
+                <Button text="clear logs" onClick={() => onClearClick()} />
             </h3>
-            { isBusy ? (
-                <div>loading...</div>
-              ) : (
-                <Log log={log} />
-              )}
+            <Log log={log} isBusy={isBusy} />
         </>
     )
 }

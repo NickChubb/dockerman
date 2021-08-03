@@ -1,5 +1,6 @@
 import Containers from './Containers.js';
 import Button from '../../Button.js';
+import Loading from '../../Loading';
 import { fetchContainers, pruneContainers, restartContainers, 
         stopContainers, startContainers } from '../../api/container';
 import { useState, useEffect } from 'react';
@@ -31,7 +32,7 @@ const DisplayContainers = () => {
                 <Button text="start all" onClick={() => startContainers()} />
             </h3>
             { isBusy ? (
-                <div>loading...</div>
+                <Loading />
               ) : (
                 <Containers containers={containers} />
               )}

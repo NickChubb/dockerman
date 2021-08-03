@@ -1,5 +1,6 @@
 import Images from './Images.js';
 import Button from '../../Button.js';
+import Loading from '../../Loading';
 import { fetchImages, pruneImages } from '../../api/image';
 import { useState, useEffect } from 'react';
 import Tabs from '../Tabs.js';
@@ -27,7 +28,7 @@ const DisplayImages = () => {
                 <Button text="prune -a" onClick={() => pruneImages()}/>
             </h3>
             { isBusy ? (
-                <div>loading...</div>
+                <Loading />
               ) : (
                 <Images images={images} />
               )}

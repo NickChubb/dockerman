@@ -212,3 +212,7 @@ body {
 .subpage-header {
   color: #007bff;
 }
+
+.loading {
+  padding: 200px 0;
+}

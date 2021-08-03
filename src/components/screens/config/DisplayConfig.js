@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import ConfigGroup from "./ConfigGroup.js";
 import { fetchConfig, updateConfig } from "../../api/system";
 import Button from '../../Button';
+import Loading from '../../Loading';
 import { Link, useHistory } from 'react-router-dom';
 import { Form, Row, Col, InputGroup, FormControl } from 'react-bootstrap';
 import Tabs from '../Tabs.js';
@@ -85,7 +86,7 @@ const DisplayConfig = () => {
                 {/* <Button text="save" onClick={handleSubmit}/> */}
             </h3>
             { isBusy ? (
-                <div>loading...</div>
+                <Loading />
               ) : (
                 <Form onSubmit={handleSubmit}>
                     <Button variant="primary" color="dodgerblue" name="submit" type="submit" text="save" />   
