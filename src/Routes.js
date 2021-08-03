@@ -1,12 +1,13 @@
-import { useState } from 'react';
-import { Switch, Route } from 'react-router-dom';
+import { useState, useEffect } from 'react';
+import { Link, Switch, Route } from 'react-router-dom';
 import useToken from './components/useToken';
+import { fetchConfig } from "./components/api/system";
+import Loading from '../../Loading';
 
 /**
  * Import all page components here
  */
 import MainPage from './page/MainPage';
-import ContainerPage from './page/ContainerPage';
 import LoginPage from './page/LoginPage';
 
 /**
@@ -16,23 +17,41 @@ import LoginPage from './page/LoginPage';
 const Routes = () => {
 
     const { token, setToken } = useToken();
-
-    if(!token) {
-      return <LoginPage setToken={setToken} />
+    const [ isBusy, setBusy ] = useState(true);
+    const [ config, setConfig ] = useState();
+    
+    const getConfig = async () => {
+      setBusy(true);
+      const configFromServer = await fetchConfig();
+      setConfig(configFromServer);
+      setBusy(false);
     }
 
+    useEffect(() => {
+        getConfig();
+    }, []);
+
+    if (!token && config && config.auth.useAuth) {
+      return <LoginPage setToken={setToken} />
+    } 
+
     return (
-    <Switch>
+      <>
+        { isBusy ? (
+                <Loading />
+              ) : (
 
-      <Route path="/container/:containerId">
-        <ContainerPage />
-      </Route>
+                <Switch>
+                  <Route path="/login">
+                    <LoginPage setToken={setToken} />
+                  </Route>
 
-      <Route path="/">
-        <MainPage />
-      </Route>
-
-    </Switch>
+                  <Route path="/">
+                    <MainPage />
+                  </Route>
+                </Switch>
+              )}
+      </>
     )
 }
 

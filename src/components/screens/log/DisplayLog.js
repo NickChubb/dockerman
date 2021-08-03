@@ -6,24 +6,33 @@ import Log from './Log.js';
 
 const DisplayLog = () => {
 
-    const [log, setLog] = useState([]);
+    const [ isBusy, setBusy ] = useState(true);
+    const [ log, setLog ] = useState([]);
+
+    const getLog = async () => {
+        setBusy(true);
+        const logFromServer = await fetchLog();
+        setLog(logFromServer);
+        setBusy(false);
+    }
 
     useEffect(() => {
-        const getLog = async () => {
-            const logFromServer = await fetchLog();
-            setLog(logFromServer);
-        }
-
         getLog();
     }, []);
+
+    const onClearClick = () => {
+        clearLog().then((data) => {
+            getLog();
+        });
+    }
 
     return (
         <>
             <Tabs page="Log" />
             <h3 className="topbar">
-                <Button text="clear logs" onClick={() => clearLog()} />
+                <Button text="clear logs" onClick={() => onClearClick()} />
             </h3>
-            <Log log={log} />
+            <Log log={log} isBusy={isBusy} />
         </>
     )
 }

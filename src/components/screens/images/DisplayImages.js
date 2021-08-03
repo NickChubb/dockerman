@@ -1,19 +1,23 @@
 import Images from './Images.js';
 import Button from '../../Button.js';
+import Loading from '../../Loading';
 import { fetchImages, pruneImages } from '../../api/image';
 import { useState, useEffect } from 'react';
 import Tabs from '../Tabs.js';
 
 const DisplayImages = () => {
 
-    const [images, setImages] = useState([]);
+    const [ isBusy, setBusy ] = useState(true);
+    const [ images, setImages ] = useState([]);
+
+    const getImages = async () => {
+        setBusy(true);
+        const imagesFromServer = await fetchImages();
+        setImages(imagesFromServer);
+        setBusy(false);
+    }
 
     useEffect(() => {
-        const getImages = async () => {
-            const imagesFromServer = await fetchImages();
-            setImages(imagesFromServer);
-        }
-
         getImages();
     }, []);
 
@@ -23,7 +27,11 @@ const DisplayImages = () => {
             <h3 className="topbar">
                 <Button text="prune -a" onClick={() => pruneImages()}/>
             </h3>
-            <Images images={images} />
+            { isBusy ? (
+                <Loading />
+              ) : (
+                <Images images={images} />
+              )}
         </>
     )
 }
