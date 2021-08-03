@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { Link, Switch, Route } from 'react-router-dom';
 import useToken from './components/useToken';
 import { fetchConfig } from "./components/api/system";
-import Loading from '../../Loading';
+import Loading from './components/Loading';
 
 /**
  * Import all page components here
