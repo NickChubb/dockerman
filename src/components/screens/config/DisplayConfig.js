@@ -11,17 +11,22 @@ const DisplayConfig = () => {
 
     let history = useHistory();
 
-    const [config, setConfig] = useState();
+    const [ isBusy, setBusy ] = useState(true);
+    const [ config, setConfig ] = useState();
+
+    // Load config and wait
+    const getConfig = async () => {
+        setBusy(true);
+        const configFromServer = await fetchConfig();
+        setConfig(configFromServer);
+        setBusy(false);
+    }
 
     useEffect(() => {
-        const getConfig = async () => {
-            const configFromServer = await fetchConfig();
-            setConfig(configFromServer);
-        }
-
         getConfig();
     }, []);
 
+    // Handle sumit button click
     const handleSubmit = (evt) => {
         evt.preventDefault();
 
@@ -79,16 +84,20 @@ const DisplayConfig = () => {
             <h3 className="topbar">
                 {/* <Button text="save" onClick={handleSubmit}/> */}
             </h3>
-            <Form onSubmit={handleSubmit}>
-                <Button variant="primary" color="dodgerblue" name="submit" type="submit" text="save" />   
-                { typeof config == "undefined" ?
-                    <div className='container'>ERROR: config file not found.</div>
-                    : 
-                    Object.entries(config).map(( [groupTitle, configGroup] ) => (
-                        <ConfigGroup setConfig={setConfig} groupTitle={groupTitle} configGroup={configGroup} />
-                    ))
-                }
-            </Form>
+            { isBusy ? (
+                <div>loading...</div>
+              ) : (
+                <Form onSubmit={handleSubmit}>
+                    <Button variant="primary" color="dodgerblue" name="submit" type="submit" text="save" />   
+                    { typeof config == "undefined" ?
+                        <div className='container'>ERROR: config file not found.</div>
+                        : 
+                        Object.entries(config).map(( [groupTitle, configGroup] ) => (
+                            <ConfigGroup setConfig={setConfig} groupTitle={groupTitle} configGroup={configGroup} />
+                        ))
+                    }
+                </Form>
+            )}
         </>
     )
 }

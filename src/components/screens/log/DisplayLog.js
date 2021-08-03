@@ -6,14 +6,17 @@ import Log from './Log.js';
 
 const DisplayLog = () => {
 
-    const [log, setLog] = useState([]);
+    const [ isBusy, setBusy ] = useState(true);
+    const [ log, setLog ] = useState([]);
+
+    const getLog = async () => {
+        setBusy(true);
+        const logFromServer = await fetchLog();
+        setLog(logFromServer);
+        setBusy(false);
+    }
 
     useEffect(() => {
-        const getLog = async () => {
-            const logFromServer = await fetchLog();
-            setLog(logFromServer);
-        }
-
         getLog();
     }, []);
 
@@ -23,7 +26,11 @@ const DisplayLog = () => {
             <h3 className="topbar">
                 <Button text="clear logs" onClick={() => clearLog()} />
             </h3>
-            <Log log={log} />
+            { isBusy ? (
+                <div>loading...</div>
+              ) : (
+                <Log log={log} />
+              )}
         </>
     )
 }

@@ -7,14 +7,18 @@ import Tabs from '../Tabs.js';
 
 const DisplayContainers = () => {
 
-    const [containers, setContainers] = useState([]);
+
+    const [ isBusy, setBusy ] = useState(true);
+    const [ containers, setContainers ] = useState([]);
+
+    const getContainers = async () => {
+        setBusy(true);
+        const containersFromServer = await fetchContainers();
+        setContainers(containersFromServer);
+        setBusy(false);
+    }
 
     useEffect(() => {
-        const getContainers = async () => {
-            const containersFromServer = await fetchContainers();
-            setContainers(containersFromServer);
-        }
-
         getContainers();
     }, []);
 
@@ -26,7 +30,11 @@ const DisplayContainers = () => {
                 <Button text="stop all" onClick={() => stopContainers()} />
                 <Button text="start all" onClick={() => startContainers()} />
             </h3>
-            <Containers containers={containers} />
+            { isBusy ? (
+                <div>loading...</div>
+              ) : (
+                <Containers containers={containers} />
+              )}
         </>
     )
 }
