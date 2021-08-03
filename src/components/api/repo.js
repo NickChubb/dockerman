@@ -11,7 +11,7 @@ export const addRepo = async (name, url) => {
         body: JSON.stringify({name: name, url: url})
     });
 
-    return res.status;
+    return res;
 }
 
 // Get all repos from database
@@ -39,7 +39,7 @@ export const deleteRepo = async (name) => {
         method: 'DELETE'
     });
 
-    return res.status;
+    return res;
 }
 
 // Build repo
@@ -49,6 +49,6 @@ export const buildRepo = async (name) => {
         method: 'PUT'
     });
 
-    return res.status;
+    return res;
 
 }

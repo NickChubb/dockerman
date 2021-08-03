@@ -178,17 +178,18 @@ class Database  {
     // Add repo to database
     async addRepo(name, url) {
 
-        const newRepo = await this.repos.create({
+        await this.repos.create({
             name: name,
             url: url,
             created: moment()
+        }).then( repo => {
+            return repo;
+        }).catch( e => {
+            throw {
+                message: `Could not add repo with name '${name}'`,
+                err: e.errors[0].message
+            };
         });
-
-        if (!newRepo) {
-            throw `Could not add repo with name: ${name}`;
-        }
-
-        return newRepo;
     } 
 
     // Get all repos from database
@@ -203,7 +204,7 @@ class Database  {
         const repo = await this.repos.findOne({ where: { name: name } });
 
         if (!repo) {
-            throw `Could not find repo with name ${name}`;
+            throw `Could not find repo with name '${name}'.`;
         }
 
         return repo;
@@ -215,7 +216,7 @@ class Database  {
         const rowCount = await this.repos.destroy({ where: { name: name } });
 
         if (!rowCount) {
-            throw `Could not find repo with name ${name}`;
+            throw `Could not find repo with name '${name}' to delete.`;
         }
 
         return true;

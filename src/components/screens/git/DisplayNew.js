@@ -3,6 +3,8 @@ import { useState } from 'react';
 import { Form } from 'react-bootstrap';
 import { useHistory, Link } from "react-router-dom";
 import { addRepo } from '../../api/repo.js';
+import Popup from 'react-popup';
+import { errorPopup } from '../../popup.js';
 
 const DisplayNew = () => {
 
@@ -11,10 +13,16 @@ const DisplayNew = () => {
     const [url, setUrl] = useState("");
     const [name, setName] = useState("");
 
-    const handleSubmit = (evt) => {
+    const handleSubmit = async (evt) => {
         evt.preventDefault();
-        addRepo(name, url);
-        history.push('/git');
+        const res = await addRepo(name, url);
+        console.log(res);
+        if (res.status == 200) {
+            history.push('/git');
+        } else {
+            const json = await res.json();
+            Popup.queue(errorPopup(json.error.message, json.error.err));
+        }
     } 
 
     return (
