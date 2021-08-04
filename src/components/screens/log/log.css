@@ -1,3 +1,30 @@
 .log-entry {
-    text-align: left; 
+    text-align: left;
+    margin-left: 0px;
+    margin-right: 0px; 
+    background: rgb(70, 70, 70);
+}
+
+.log-time {
+    padding-top: 5px;
+    padding-bottom: 5px;
+    background: rgb(72, 72, 72);
+}
+
+.log-message {
+    padding-top: 5px;
+    padding-bottom: 5px;
+    border-left: 1px solid rgb(68, 68, 68);
+}
+
+.log-area {
+    border: 1px solid rgb(60, 60, 60);
+}
+
+.log-controls {
+    margin-top: 10px;
+}
+
+.log-controls > * {
+    margin: 15px;
 }
