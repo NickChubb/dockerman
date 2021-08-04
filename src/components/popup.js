@@ -12,12 +12,12 @@ export const errorPopup = (message, error) => {
 
 export const confirmPopup = (message, promptValue, callback) => {
     return Popup.register({
-        title: `Confirm`,
-        content: `Are you sure you want to do this?`,
+        title: `Confirm Action`,
+        content: `Are you sure you want to ${message}?  This action cannot be undone.`,
         buttons: {
-            right: ['Cancel'],
+            right: ['cancel'],
             right: [{
-                text: 'OK',
+                text: 'ok',
                 key: '⌘+s',
                 className: 'success',
                 action: function () {
