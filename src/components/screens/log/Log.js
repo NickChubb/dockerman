@@ -18,7 +18,7 @@ const Log = ({log, isBusy}) => {
                                         <LogEntry entry={entry} />
                                 ))
                                 :
-                                <div>No logs to display.</div>
+                                <div className='no-data-message' >No logs to display.</div>
                         }
                     </div>
             )}

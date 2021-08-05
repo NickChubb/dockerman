@@ -216,3 +216,9 @@ body {
 .loading {
   padding: 200px 0;
 }
+
+.no-data-message {
+  background: rgb(70, 70, 70);
+  border: 1px solid rgb(67, 67, 67);
+  padding: 10px;
+}

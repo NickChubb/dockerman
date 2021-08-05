@@ -5,7 +5,7 @@ const Repos = ({ repos }) => {
     return (
         <>
             {
-                repos.legth != 0
+                repos && repos.legth != 0
                 ?
                 <div className='container'>No Containers, <Link to={'/new'}>click here</Link> to add new Container.</div> 
                 : 
