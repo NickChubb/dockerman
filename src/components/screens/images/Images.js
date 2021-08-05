@@ -3,7 +3,7 @@ import Image from './Image.js';
 const Images = ({images}) => {
     return (
         <>
-            {log && log.length > 0 ?
+            {images && images.length > 0 ?
                             
                     images.map((image, i) => (
                             <Image key={i} image={image} />
