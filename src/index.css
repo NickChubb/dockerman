@@ -47,13 +47,32 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center;  
-  margin-top: 10px;
-  margin-bottom: 10px;
+  margin-top: 5px;
+  margin-bottom: 5px;
 
 }
 
 .form-entry {
-  max-width: 70%;
+  width: 70%;
+  margin-right: 20px;
+  margin-left: 10px;
+}
+
+.form-entry-text {
+  
+}
+
+.form-entry-switch {
+  text-align: left;
+  padding-top: 15px;
+  width: 65%;
+  margin-left: 20px;
+}
+
+.form-title {
+  width: 30%;
+  text-align: right;
+  padding: 15px;
 }
 
 .btn {
