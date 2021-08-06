@@ -36,7 +36,7 @@ const Status = ({ containerState, id }) => {
             setState("loading");
         } 
         while (status != expected) {
-            let status = await getContainerState(expected);
+            status = await getContainerState(expected);
         }
     }
 
@@ -88,7 +88,7 @@ const Status = ({ containerState, id }) => {
                 return (
                     <>
                         <Button color='red' text='stop' onClick={() => { stopOnClick(id) }} />
-                        <Button color='blue' text='Restart' onClick={() => { restartOnClick(id) }} disabled={true}/>
+                        <Button color='blue' text='Restart' onClick={() => { restartOnClick(id) }} />
                     </>
                 );
                 break;
@@ -118,8 +118,8 @@ const Status = ({ containerState, id }) => {
             default:
                 return (
                     <>
-                        <Button color='black' text='remove' onClick={() => { removeOnClick(id) }}/>
-                        <Button color='blue' text='Restart' onClick={() => { restartOnClick(id) }} disabled={true}/>
+                        <Button color='black' text='remove' onClick={() => { removeOnClick(id) }} />
+                        <Button color='blue' text='Restart' onClick={() => { restartOnClick(id) }} />
                     </>
                 );
                 break;

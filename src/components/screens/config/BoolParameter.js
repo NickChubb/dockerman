@@ -7,11 +7,11 @@ const BoolParameter = ({ param, value }) => {
 
     return (
         <InputGroup>
-            <span> {param} </span>
+            <span className="form-title"> {param} </span>
             {enabled ?
                 <Form.Check 
                     type="switch" 
-                    className="mb-2 mr-sm-2 form-entry"  
+                    className="mb-2 mr-sm-2 form-entry-switch"  
                     id={param}
                     name={param}
                     onChange={e => {
@@ -23,7 +23,7 @@ const BoolParameter = ({ param, value }) => {
                 :
                 <Form.Check 
                     type="switch" 
-                    className="mb-2 mr-sm-2 form-entry"
+                    className="mb-2 mr-sm-2 form-entry-switch"
                     id={param}
                     name={param}
                     onChange={e => {

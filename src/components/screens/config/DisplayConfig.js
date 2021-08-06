@@ -91,7 +91,7 @@ const DisplayConfig = () => {
                 <Form onSubmit={handleSubmit}>
                     <Button variant="primary" color="dodgerblue" name="submit" type="submit" text="save" />   
                     { typeof config == "undefined" ?
-                        <div className='container'>ERROR: config file not found.</div>
+                        <div className='container'>ERROR: config file not found.  Click <a>here</a> to re-install config.</div>
                         : 
                         Object.entries(config).map(( [groupTitle, configGroup] ) => (
                             <ConfigGroup setConfig={setConfig} groupTitle={groupTitle} configGroup={configGroup} />

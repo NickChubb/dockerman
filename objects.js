@@ -247,10 +247,11 @@ class Database  {
 
     // Deletes all log entries
     async clearLog() {
-        this.log.destroy({
+        const response = await this.log.destroy({
             where: {},
             truncate: true
           })
+        return response;
     }
 }
 

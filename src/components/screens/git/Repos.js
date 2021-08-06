@@ -5,7 +5,7 @@ const Repos = ({ repos }) => {
     return (
         <>
             {
-                repos.length == 0
+                repos && repos.legth != 0
                 ?
                 <div className='container'>No Repos, <Link to={'/new'}>click here</Link> to add new Git Repository.</div> 
                 : 

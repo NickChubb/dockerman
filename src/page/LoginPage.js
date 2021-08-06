@@ -10,15 +10,27 @@ const LoginPage = ({ setToken }) => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+
+        // Get client info from https://geolocation-db.com/json/
+        const geolocationResponse = await fetch('https://geolocation-db.com/json/');
+        const clientInfo = await geolocationResponse.json();
+
+        const ip = clientInfo.IPv4;
+        const location = `${clientInfo.city}, ${clientInfo.state}, ${clientInfo.country_name}`;
+
         const token = await loginUser({
             username,
-            password
+            password,
+            ip,
+            location
         });
         
         if (token) {
             setToken(token);
         }
     }
+
+
 
     return (
         <div className='display'>
