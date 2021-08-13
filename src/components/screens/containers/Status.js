@@ -22,7 +22,6 @@ const Status = ({ containerState, id }) => {
     }, []);
 
     const getState = (state) => {
-        console.log("state in getState: " + state);
         return state === 'running' ? '✅' : '🛑' ;
     }
 

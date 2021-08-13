@@ -9,22 +9,22 @@ import { AiOutlineLink } from 'react-icons/ai';
 
 const Serve = ({ ports, id, name }) => {
 
-    let defaultPort = ports[0] ? ports[0].PublicPort : "0000";
-    
     const [domainName, setDomainName] = useState('');
     const [enabled, setEnabled] = useState(false);
     const [slug, setSlug] = useState('');
-    const [port, setPort] = useState(defaultPort);
+    const [port, setPort] = useState('0000');
 
     useEffect(() => {
+        
         getService(name).then(service => {
             setSlug(service.slug);
             setEnabled(service.served);
+            setPort(service.port);
         });
 
-	fetchConfig().then(config => {
-	    setDomainName(config.domain.domainName);
-	});
+        fetchConfig().then(config => {
+            setDomainName(config.domain.domainName);
+        });
 
     }, []);
 
@@ -64,7 +64,9 @@ const Serve = ({ ports, id, name }) => {
             } 
 
             {enabled ? 
-                <Form.Control as="select" >
+                <Form.Control as="select" onChange={e => {
+                        setPort(e.target.value);
+                    }} >
                     {
                         ports.map((port) => (
                             <option>{port.PublicPort}</option>
@@ -73,7 +75,7 @@ const Serve = ({ ports, id, name }) => {
                 </Form.Control> 
                 : 
                 <Form.Control as="select" disabled >
-                    <option>{defaultPort}</option>
+                    <option>{port}</option>
                 </Form.Control>  
             } 
             on
@@ -94,6 +96,8 @@ const Serve = ({ ports, id, name }) => {
                 }
                 
             </InputGroup>
+            
+            <Button variant="primary" color="dodgerblue" name="submit" type="submit" text="update" /> 
             
             <a href={getLink()} target="_blank"><AiOutlineLink /></a>
             
