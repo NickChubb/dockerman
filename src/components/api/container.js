@@ -8,7 +8,6 @@ import { homepage } from '../../../package.json';
 export const fetchContainer = async (id) => {
     let res = await fetch(`${homepage}/api/containers/${id}`);
     let data = await res.json();
-    // console.log(data);
     return data;
 }
 
@@ -16,7 +15,17 @@ export const fetchContainer = async (id) => {
 export const fetchContainerInfo = async (id) => {
     let res = await fetch(`${homepage}/api/containers/${id}/inspect`);
     let data = await res.json();
-    // console.log("GET /getContainerInfo = " + JSON.stringify(data));
+    return data;
+}
+
+// Fetch individual container logs form API based on ID
+export const fetchContainerLogs = async (id, page=0, limit=0, timestamps=true) => {
+    let res = await fetch(`${homepage}/api/containers/${id}/log?` + new URLSearchParams({
+        page: page,
+        limit: limit,
+        timestamps: timestamps
+    }));
+    let data = await res.json();
     return data;
 }
 
@@ -60,7 +69,6 @@ export const removeContainer = async (id) => {
 export const fetchContainers = async () => {
     let res = await fetch(`${homepage}/api/containers`);
     let data = await res.json();
-    // console.log(data);
     return data;
 }
 

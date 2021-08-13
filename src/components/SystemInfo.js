@@ -12,13 +12,11 @@ const SystemInfo = () => {
 
         const getInfo = async () => {
             const systemInfo = await fetchInfo();
-            console.log(systemInfo);
             setInfo(systemInfo);
         }
 
         const getDockerInfo = async () => {
             const dockerInfo = await fetchSystemInfo();
-            console.log(dockerInfo);
             setDockerInfo(dockerInfo);
         }
 

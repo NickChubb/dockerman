@@ -1,29 +1,35 @@
-import React from 'react';
+import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { fetchContainerInfo } from '../../api/container';
-import Button from '../../Button';
+import ContainerScreen from './ContainerScreen';
+import Loading from '../../Loading';
 
 const ContainerPage = () => {
 
-    let { id } = useParams();
-    let container = fetchContainerInfo(id).then((container) => {console.log(container)});
+    const { id } = useParams();
+    const [ isBusy, setBusy ] = useState(true);
+    const [ containerInfo, setContainerInfo ] = useState(null);
+
+    const getContainer = async (id) => {
+        setBusy(true);
+        const containerInfoResponse = await fetchContainerInfo(id);
+        setContainerInfo(containerInfoResponse);
+        setBusy(false);
+    }
+
+    useEffect(() => {
+        getContainer(id);
+    }, []);
 
     return (
         <>  
-            <h3 className="topbar">
-                <Button text="restart" />
-                <Button text="stop" />
-                <Button text="start" />
-                <Button text="remove" />
-            </h3>
-            <div className='container'>
-
-                <h2>{id}</h2>
-
-                {/* <InfoField title="Ports" /> */}
-                {/* <h3>Logs</h3> */}
-
-            </div>
+            {
+                isBusy ? (
+                    <Loading />
+                ) : (
+                    <ContainerScreen containerInfo={containerInfo}/>
+                )
+            }
         </>
     )
 }
