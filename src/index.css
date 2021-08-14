@@ -224,6 +224,10 @@ body {
   justify-content: space-between;
 }
 
+.back-link {
+  margin-right: 25px;
+}
+
 .system-info {
   color: lightblue;
 }
@@ -241,3 +245,4 @@ body {
   border: 1px solid rgb(67, 67, 67);
   padding: 10px;
 }
+

@@ -2,7 +2,6 @@
     text-align: left;
     margin-left: 0px;
     margin-right: 0px; 
-    background: rgb(70, 70, 70);
 }
 
 .log-time {
@@ -19,6 +18,7 @@
 
 .log-area {
     border: 1px solid rgb(60, 60, 60);
+    background: rgb(70, 70, 70);
 }
 
 .log-controls {

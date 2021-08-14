@@ -1,5 +1,6 @@
 import LogPanel from './LogPanel';
 import Button from '../../Button';
+import { Link } from 'react-router-dom';
 
 const ContainerScreen = ({ containerInfo }) => {
 
@@ -9,12 +10,13 @@ const ContainerScreen = ({ containerInfo }) => {
 
     return (
         <>
-            <h3 className="topbar">
+            <div className="topbar">
+                <Link to="/" className='back-link'>👈 Go Back</Link>
                 <Button text="restart" />
                 <Button text="stop" />
                 <Button text="start" />
                 <Button text="remove" />
-            </h3>
+            </div>
             <div className='container'>
 
                 <h2>{name}</h2>
