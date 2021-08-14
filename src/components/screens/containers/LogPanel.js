@@ -34,18 +34,17 @@ const LogPanel = ({ containerInfo }) => {
         setBusy(false);
     }
 
+    // Get logs in response to a page change.
     useEffect(() => {
         getLogs(name);
-    }, []);
+    }, [page]);
 
     const handleNextClick = () => {
         setPage(page + 1);
-        getLogs(name);
     }
 
     const handleBackClick = () => {
         setPage(page - 1);
-        getLogs(name);
     }
 
     return (
