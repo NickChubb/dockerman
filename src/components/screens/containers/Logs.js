@@ -4,7 +4,8 @@ const Logs = ({ logs }) => {
 
     return (
         <div style={{
-            textAlign: 'left'
+            textAlign: 'left',
+            wordWrap: 'break-word'
         }}>
             {
                 logs && logs.length > 0 ?

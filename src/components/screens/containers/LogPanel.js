@@ -9,9 +9,9 @@ import '../log/log.css';
 const LogPanel = ({ containerInfo }) => {
 
     const [ isBusy, setBusy ] = useState(true);
-    const [ entriesPerPage, setEntriesPerPage ] = useState(null);
     const [ config, setConfig ] = useState(null);
     const [ logs, setLogs ] = useState(null);
+    const [ maxPage, setMaxPage ] = useState(null);
     const [ page, setPage ] = useState(0);
 
     const name = containerInfo.Name.substring(1);
@@ -28,9 +28,11 @@ const LogPanel = ({ containerInfo }) => {
         }
 
         const entriesPerPage = configResponse.log.entriesPerPage;
+
+        // Fetch container logs and maxPage
         const logsResponse = await fetchContainerLogs(id, page, entriesPerPage);
-        // setEntriesPerPage(entries);
-        setLogs(logsResponse);
+        setLogs(logsResponse.logs);
+        setMaxPage(logsResponse.maxPage);
         setBusy(false);
     }
 
@@ -40,11 +42,19 @@ const LogPanel = ({ containerInfo }) => {
     }, [page]);
 
     const handleNextClick = () => {
-        setPage(page + 1);
+
+        // Stop if 
+        if ( page < maxPage ) {
+            setPage(page + 1);
+        }
     }
 
     const handleBackClick = () => {
-        setPage(page - 1);
+
+        // Don't want negative pages
+        if ( page > 0 ) {
+            setPage(page - 1);
+        } 
     }
 
     return (
