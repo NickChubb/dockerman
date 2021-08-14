@@ -9,7 +9,7 @@ const Container = ({container, key}) => {
 
     return (
         <div className='container'>
-            <Link to={`/container/${name}`}>
+            <Link to={{ pathname: `/container/${name}`, state: container.Ports }}>
                 <h2>{name}</h2>
             </Link>
             <div className='container-controls'>
@@ -19,9 +19,5 @@ const Container = ({container, key}) => {
         </div>
     )
 }
-
-// Container.defaultProps = {
-//     title: 'Container',
-// }
 
 export default Container;

@@ -6,8 +6,10 @@ import { startContainer, stopContainer, removeContainer,
 
 const Status = ({ containerState, id }) => {
 
+    // Set initial state to containerState
     const [state, setState] = useState(containerState);
     
+    // Get container state 
     const getContainerState = async (expect = "") => {
         let container = await fetchContainerInfo(id);
         let status = container.State.Status;
