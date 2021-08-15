@@ -113,7 +113,7 @@ class Database  {
 
         console.log("🗄 Added new service to DB.");
 
-        this.router = new Routes();
+        this.router = new Router();
         this.router.sync();
 
         return newService;

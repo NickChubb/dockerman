@@ -1,10 +1,11 @@
 import Button from '../../Button';
+import StateField from './StateField';
 import { useState, useEffect } from 'react';
 import { startContainer, stopContainer, removeContainer,
          restartContainer, fetchContainerInfo } from '../../api/container';
 
 
-const Status = ({ containerState, id }) => {
+const Status = ({ containerState, id, getContainers }) => {
 
     // Set initial state to containerState
     const [state, setState] = useState(containerState);
@@ -23,10 +24,6 @@ const Status = ({ containerState, id }) => {
         getContainerState();
     }, []);
 
-    const getState = (state) => {
-        return state === 'running' ? '✅' : '🛑' ;
-    }
-
     const stopOnClick = async (id) => {
         const expected = "exited";
 
@@ -39,6 +36,8 @@ const Status = ({ containerState, id }) => {
         while (status != expected) {
             status = await getContainerState(expected);
         }
+
+        getContainers();
     }
 
     const startOnClick = async (id) => {
@@ -53,6 +52,8 @@ const Status = ({ containerState, id }) => {
         while (status != expected) {
             status = await getContainerState(expected);
         }
+
+        getContainers();
     }
 
     const removeOnClick = async (id) => {
@@ -67,6 +68,8 @@ const Status = ({ containerState, id }) => {
         while (status == "removing") {
             status = await getContainerState(expected);
         }
+
+        getContainers();
     }
 
     const restartOnClick = async (id) => {
@@ -81,6 +84,8 @@ const Status = ({ containerState, id }) => {
         while (status == "restarting") {
             status = await getContainerState(expected);
         }
+
+        getContainers();
     }
 
     const setButton = (status, id) => {
@@ -129,7 +134,7 @@ const Status = ({ containerState, id }) => {
 
     return (
         <>
-            status: {getState(state)} <small>({state})</small>
+            <StateField state={state}/>
             {setButton(state, id)}
         </>
     )

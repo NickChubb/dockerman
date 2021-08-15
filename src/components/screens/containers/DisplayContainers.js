@@ -26,15 +26,15 @@ const DisplayContainers = () => {
     return (
         <>
             <h3 className="topbar">
-                <Button text="prune -a" onClick={() => pruneContainers()} />
-                <Button text="restart all" onClick={() => restartContainers()} />
-                <Button text="stop all" onClick={() => stopContainers()} />
-                <Button text="start all" onClick={() => startContainers()} />
+                <Button text="prune -a" onClick={() => pruneContainers().then(getContainers())} />
+                <Button text="restart all" onClick={() => restartContainers().then(getContainers())} />
+                <Button text="stop all" onClick={() => stopContainers().then(getContainers())} />
+                <Button text="start all" onClick={() => startContainers().then(getContainers())} />
             </h3>
             { isBusy ? (
                 <Loading />
               ) : (
-                <Containers containers={containers} />
+                <Containers containers={containers} getContainers={getContainers}/>
               )}
         </>
     )

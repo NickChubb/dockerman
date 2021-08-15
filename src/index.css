@@ -112,6 +112,10 @@ body {
   cursor: pointer;
 }
 
+.container-exited {
+  background: #404040;
+}
+
 .container.reminder {
   border-left: 5px solid green;
 }
@@ -120,11 +124,16 @@ body {
   padding: 5px;
 }
 
+.container h2 > * {
+  margin: 10px;
+}
+
 .container h3 {
   display: flex;
   align-items: center;
   justify-content: space-between;
 }
+
 
 .container-controls {
   display: flex;

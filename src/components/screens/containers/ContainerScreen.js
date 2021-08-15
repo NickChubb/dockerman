@@ -1,12 +1,13 @@
 import LogPanel from './LogPanel';
 import ControlPanel from './ControlPanel';
-import Button from '../../Button';
+import StateAnimation from './StateAnimation';
 import { Link } from 'react-router-dom';
 
 const ContainerScreen = ({ containerInfo, ports }) => {
 
     // Container fields
     const name = containerInfo.Name.substring(1);
+    const state = containerInfo.State.Status;
 
     return (
         <>
@@ -15,7 +16,7 @@ const ContainerScreen = ({ containerInfo, ports }) => {
             </div>
             <div className='container'>
 
-                <h2>{name}</h2>
+                <h2 style={{ alignContent: 'center' }}>{name} <StateAnimation state={state} /></h2>
 
                 <ControlPanel containerInfo={containerInfo} ports={ports} />
 

@@ -1,5 +1,4 @@
-import { Link } from 'react-router-dom';
-import Serve from './Serve'
+import ServeForm from './ServeForm'
 import Button from '../../Button'
 
 const ControlPanel = ({ containerInfo, ports }) => {
@@ -27,7 +26,7 @@ const ControlPanel = ({ containerInfo, ports }) => {
 
             {/* https://docs.docker.com/engine/api/v1.41/#operation/ContainerTop */}
 
-            <Serve ports={ports} id={name} name={name} />
+            <ServeForm ports={ports} id={name} name={name} state={status} />
     
         </div>
     )
