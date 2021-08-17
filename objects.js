@@ -141,12 +141,19 @@ class Database  {
         service.served = served;
         service.slug = slug;
         service.port = port;
-        service.save();
 
-        console.log(`🗄🔄 Updated ${name} to served: ${served}, slug: ${slug}, port: ${port}.`);
+        await service.save().then(( res ) => {
 
-        this.router = new Router();
-        this.router.sync();
+            // Refresh Router
+            this.router = new Router();
+            this.router.sync();
+
+        }).catch(( err ) => {
+            console.log(err);
+            return err;
+        });
+
+        return true;
     }
 
     /**

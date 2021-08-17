@@ -76,13 +76,14 @@ const ServeForm = ({ ports, id, name, state }) => {
 
             <InputGroup>
                 <InputGroup.Prepend>
-                    <InputGroup.Text>{domainName}/</InputGroup.Text>
+                     <InputGroup.Text>{domainName}/</InputGroup.Text>
                 </InputGroup.Prepend>
                     <FormControl 
                         id="slug" 
                         onChange={e => {
                             setSlug(e.target.value);
                         }} 
+                        value={slug}
                         disabled={!enabled}
                     /> 
                 
@@ -93,8 +94,7 @@ const ServeForm = ({ ports, id, name, state }) => {
                 color="dodgerblue" 
                 name="submit" 
                 type="submit" 
-                text="update"
-                disabled={!enabled} /> 
+                text="update" /> 
             
             <a href={getLink()} target="_blank"><AiOutlineLink /></a>
 
