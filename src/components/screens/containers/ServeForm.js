@@ -94,7 +94,9 @@ const ServeForm = ({ ports, id, name, state }) => {
                 color="dodgerblue" 
                 name="submit" 
                 type="submit" 
-                text="update" /> 
+                text="update"
+                disabled={state !== 'running'} 
+                /> 
             
             <a href={getLink()} target="_blank"><AiOutlineLink /></a>
 
