@@ -21,3 +21,9 @@ export const loginUser = async (credentials) => {
         return data;
     }
 }
+
+export const fetchUseAuth = async () => {
+    let response = await fetch(`${homepage}/api/auth/useAuth`);
+    let data = await response.json();
+    return data;
+}

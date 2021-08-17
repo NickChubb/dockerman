@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Link, Switch, Route } from 'react-router-dom';
 import useToken from './components/useToken';
-import { fetchConfig } from "./components/api/system";
+import { fetchUseAuth } from "./components/api/login";
 import Loading from './components/Loading';
 
 /**
@@ -18,12 +18,12 @@ const Routes = () => {
 
     const { token, setToken } = useToken();
     const [ isBusy, setBusy ] = useState(true);
-    const [ config, setConfig ] = useState();
+    const [ useAuth, setUseAuth ] = useState();
     
     const getConfig = async () => {
       setBusy(true);
-      const configFromServer = await fetchConfig();
-      setConfig(configFromServer);
+      const useAuthFromServer = await fetchUseAuth();
+      setUseAuth(useAuthFromServer);
       setBusy(false);
     }
 
@@ -31,7 +31,7 @@ const Routes = () => {
         getConfig();
     }, []);
 
-    if (!token && config && config.auth.useAuth) {
+    if (!token && useAuth) {
       return <LoginPage setToken={setToken} />
     } 
 

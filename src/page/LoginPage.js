@@ -30,24 +30,24 @@ const LoginPage = ({ setToken }) => {
         }
     }
 
-
-
     return (
-        <div className='display'>
-            <h1>Please Log In</h1>
-            <form className='login-form' onSubmit={handleSubmit}>
-                <label className='login-element'>
-                    <p>Username</p>
-                    <input type="text" onChange={e => setUserName(e.target.value)} />
-                </label>
-                <label className='login-element'>
-                    <p>Password</p>
-                    <input type="password" onChange={e => setPassword(e.target.value)} />
-                </label>
-                <div>
-                    <Button color="blue" type="submit" text="Login" />
-                </div>
-            </form>
+        <div className="body">
+            <div className='display'>
+                <h1>Please Log In</h1>
+                <form className='login-form' onSubmit={handleSubmit}>
+                    <label className='login-element'>
+                        <p>Username</p>
+                        <input type="text" onChange={e => setUserName(e.target.value)} />
+                    </label>
+                    <label className='login-element'>
+                        <p>Password</p>
+                        <input type="password" onChange={e => setPassword(e.target.value)} />
+                    </label>
+                    <div>
+                        <Button color="blue" type="submit" text="Login" />
+                    </div>
+                </form>
+            </div>
         </div>
     )
 }
