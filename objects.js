@@ -3,7 +3,7 @@ const bodyParser = require('body-parser');
 const path = require('path');
 const proxy = require('express-http-proxy')
 const Sequelize =  require('sequelize');
-const moment = require('moment');
+const { DateTime } = require("luxon");
 
 const Docker = require('dockerode');
 const docker = new Docker({ socketPath: '/var/run/docker.sock' });
@@ -20,6 +20,21 @@ class Database  {
             // SQLite only
             storage: 'data/database.sqlite',
         });
+
+        /**
+         *  Defines the database for the authentication token. 
+         * 
+         * 
+         */
+        this.token = this.sequelize.define('token', {
+            token: {
+                type: Sequelize.UUID,
+                defaultValue: Sequelize.UUIDV4,
+                primaryKey: true
+            },
+            ip: Sequelize.STRING,
+            location: Sequelize.STRING
+        })
         
         /*
         *   Defines the database for services (containers) to be served.
@@ -60,6 +75,7 @@ class Database  {
     sync() {
         this.services.sync();
         this.log.sync();
+        this.token.sync();
     }
 
     /**
@@ -99,7 +115,7 @@ class Database  {
     async addService(name, description, path, served, slug, port) {
 
         // Get date
-        var now = moment();
+        var now = DateTime.now();
 
         const newService = await this.services.create({
             name: name,
@@ -171,7 +187,7 @@ class Database  {
     async addLogEntry(message) {
 
         // get time
-        var now = moment();
+        var now = DateTime.now();
 
         const newLogEntry = await this.log.create({
             time: now,
@@ -196,6 +212,70 @@ class Database  {
           })
         return response;
     }
+
+    /**
+     * Iterate through all tokens and remove tokens which are 
+     * older than 7 days
+     * 
+     * @TODO: Add config option which changes the expiration
+     * time for tokens.
+     */
+    async refreshTokens() {
+        const response = await this.token.destroy({
+            where: {
+                createdBy: {
+                    $lte: DateTime.now().minus({days: 7})
+                }
+            }
+        });
+
+        console.log(`Refreshing tokens... Deleted ${response} tokens.`)
+        return response;
+    }
+
+    /**
+     * Add new token to DB, refresh old tokens.
+     * 
+     * @param {UUIDV4} token 
+     * @param {String} ip 
+     * @param {String} location 
+     */
+    async addToken(token, ip, location) {
+        this.refreshTokens();
+        
+        const newToken = await this.token.create({
+            token: token,
+            ip: ip,
+            location: location
+        }).catch(err => {
+            console.log(`🔑💥 Error adding ${token} to db.`);
+            return false;
+        });
+
+        console.log("🔑✅ Added new token to DB.");
+
+        return true;
+    }
+
+    /**
+     * Validate token exists in Database.
+     * 
+     * @param {UUIDV4} token 
+     * @returns true if token in DB
+     */
+    async validateToken (token) {
+        // this.refreshTokens();
+
+        const found = await this.token.findOne({
+            where: { token: token } 
+        });
+        
+        if (!found) {
+            return false;
+        }
+
+        return true;
+    } 
 }
 
 /**

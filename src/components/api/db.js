@@ -1,46 +1,52 @@
-import { homepage } from '../../../package.json';
+import { apiRequest } from './helpers.js';
 
 export const getService = async (name) => {
 
-    let res = await fetch(`${homepage}/api/db/services/${name}`)
+    let res = await dbApiRequest(`/services/${name}`, 'GET');
     let data = await res.json();
-    
     return data;
 }
 
 export const updateService = async (name, served, slug, port) => {
 
-    const update = {
+    const body = {
         served: served,
         slug: slug,
         port: port 
     }
 
-    let res = await fetch(`${homepage}/api/db/services/${name}`, {
-        method: 'PUT',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(update)
-    });
-
-    return res.status;
+    let res = await dbApiRequest(`/services/${name}`, 'PUT', body);
+    let data = await res.json();
+    return data;
 }
 
 export const fetchLog = async () => {
 
-    let res = await fetch(`${homepage}/api/db/log`)
+    let res = await dbApiRequest(`/log`, 'GET');
     let data = await res.json();
-    
     return data;
 }
 
 export const clearLog = async () => {
 
-    let res = await fetch(`${homepage}/api/db/log`, {
-        method: 'DELETE'
-    })
-
+    let res = await dbApiRequest(`/log`, 'DELETE');
     let data = await res.json();
     return data;
+}
+
+/**
+ * Database API class call functions.  Extends general apiRequest method
+ * from ./helpers.js
+ * 
+ * @param {string} endpoint '/URI'
+ * @param {String} method GET, POST, PUT, DELETE, ETC
+ * @param {Object} body 
+ * @param {Object} params 
+ * @returns 
+ */
+ export const dbApiRequest = async (endpoint, method, body, params) => {
+
+    const reqEndpoint = `/db${endpoint}`;
+    const res = await apiRequest(reqEndpoint, method, body, params);
+    return res;
 }
