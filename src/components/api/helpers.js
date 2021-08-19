@@ -1,5 +1,4 @@
 import { homepage } from '../../../package.json';
-import { useHistory } from "react-router-dom";
 
 /**
  * General API request builder
@@ -31,12 +30,6 @@ export const apiRequest = async (endpoint, method='GET', body=null, params=null)
             headers: headers,
             body: body
         });
-
-    const history = useHistory();
-
-    if (res.status == 403) {
-        history.push("/login");
-    }
 
     return res;
 }
