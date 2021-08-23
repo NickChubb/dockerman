@@ -3,7 +3,7 @@ import ControlPanel from './ControlPanel';
 import StateAnimation from './StateAnimation';
 import { Link } from 'react-router-dom';
 
-const ContainerScreen = ({ containerInfo, ports }) => {
+const ContainerScreen = ({ containerInfo, stats, ports }) => {
 
     // Container fields
     const name = containerInfo.Name.substring(1);
@@ -18,7 +18,7 @@ const ContainerScreen = ({ containerInfo, ports }) => {
 
                 <h2 style={{ alignContent: 'center' }}>{name} <StateAnimation state={state} /></h2>
 
-                <ControlPanel containerInfo={containerInfo} ports={ports} />
+                <ControlPanel containerInfo={containerInfo} stats={stats} ports={ports} />
 
                 <LogPanel containerInfo={containerInfo} />
 

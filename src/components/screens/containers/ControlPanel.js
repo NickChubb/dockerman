@@ -1,7 +1,8 @@
 import ServeForm from './ServeForm'
+import StatsField from './StatsField'
 import Button from '../../Button'
 
-const ControlPanel = ({ containerInfo, ports }) => {
+const ControlPanel = ({ containerInfo, stats, ports }) => {
 
     // Container fields
     const name = containerInfo.Name.substring(1);
@@ -23,6 +24,9 @@ const ControlPanel = ({ containerInfo, ports }) => {
             <h4>memory</h4>
 
             <h4>disk size</h4>
+            
+
+            <StatsField stats={stats} />
 
             {/* https://docs.docker.com/engine/api/v1.41/#operation/ContainerTop */}
 
