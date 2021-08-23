@@ -296,7 +296,6 @@ class Router {
         this.db.sync();
 
         this.config = new Config();
-        this.config.sync();
         let port = this.config.dockerman.port;
 
         this.app.use(bodyParser.urlencoded({ extended: false }));
