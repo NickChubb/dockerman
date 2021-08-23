@@ -1,19 +1,14 @@
 #!/usr/bin/env node
 
-const express = require('express');
-const bodyParser = require('body-parser');
-const path = require('path');
-const proxy = require('express-http-proxy')
-
-const {Router, Database} = require('./objects.js');
+const Database = require('./lib/database.js');
+const Router = require('./router.js');
 
 /**
  * Connect to Service DB
  */
 
  const db = new Database();
- db.sync();
-
+ 
 /**
  * Express Routing
  */
