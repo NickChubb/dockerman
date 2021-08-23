@@ -295,6 +295,10 @@ class Router {
         this.db = new Database();
         this.db.sync();
 
+        this.config = new Config();
+        this.config.sync();
+        let port = this.config.dockerman.port;
+
         this.app.use(bodyParser.urlencoded({ extended: false }));
         this.app.use(bodyParser.json());
 
@@ -308,19 +312,12 @@ class Router {
         // Sync served services
         this.sync();
 
-        return (async () => {
-            await this.config.sync();
-            let port = this.config.dockerman.port;
+        // Listen at port
+        this.app.listen(port, () => {
+            console.log(`Listening to requests on http://localhost:${port}`);
+        });
 
-            // Listen at port
-            this.app.listen(port, () => {
-                console.log(`Listening to requests on http://localhost:${port}`);
-            });
-
-            Router.instance = this;
-
-            return this;
-        })
+        Router.instance = this;
     }
 
     /**
