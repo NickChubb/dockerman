@@ -4,6 +4,9 @@
     "username": "admin",
     "password": "admin"
   },
+  "dockerman": {
+    "port": 4000
+  },
   "domain": {
     "domainName": "mydomainname.com"
   },

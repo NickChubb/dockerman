@@ -8,6 +8,8 @@ const { DateTime } = require("luxon");
 const Docker = require('dockerode');
 const docker = new Docker({ socketPath: '/var/run/docker.sock' });
 
+const Config = require('./lib/config.js');
+
 class Database  {
 
     constructor() {
@@ -289,11 +291,14 @@ class Router {
         if (Router.instance) { return Router.instance; }
 
         this.app = express();
-        let port = 3050;
-
         // Get database
         this.db = new Database();
         this.db.sync();
+
+        this.config = new Config();
+        this.config.sync();
+        let port = this.config.dockerman.port;
+
 
         this.app.use(bodyParser.urlencoded({ extended: false }));
         this.app.use(bodyParser.json());
