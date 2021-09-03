@@ -7,12 +7,13 @@ export const getService = async (name) => {
     return data;
 }
 
-export const updateService = async (name, served, slug, port) => {
+export const updateService = async (name, served, slug, port, priv) => {
 
     const body = {
         served: served,
         slug: slug,
-        port: port 
+        port: port,
+        priv: priv
     }
 
     let res = await dbApiRequest(`/services/${name}`, 'PUT', body);

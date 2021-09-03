@@ -13,12 +13,14 @@ const ServeForm = ({ ports, id, name, state }) => {
     const [enabled, setEnabled] = useState(false);
     const [slug, setSlug] = useState('');
     const [port, setPort] = useState('0000');
+    const [priv, setPriv] = useState(false);
 
     useEffect(() => {
         
         getService(name).then(service => {
             setSlug(service.slug);
             setPort(service.port);
+            setPriv(service.priv);
 
             if (state == 'running') {
                 setEnabled(service.served);
@@ -33,7 +35,7 @@ const ServeForm = ({ ports, id, name, state }) => {
 
     const handleSubmit = (evt) => {
         evt.preventDefault();
-        updateService(name, enabled, slug, port);
+        updateService(name, enabled, slug, port, priv);
     } 
 
     const getLink = () => {
@@ -88,6 +90,19 @@ const ServeForm = ({ ports, id, name, state }) => {
                     /> 
                 
             </InputGroup>
+
+            <Form.Check 
+                type="switch" 
+                className="mb-2 mr-sm-2" 
+                label="Private"
+                id={"priv-switch-" + name}
+                onChange={e => {
+                    setPriv(e.target.checked);
+                }}
+                value={priv}
+                checked={priv}
+                disabled={state !== 'running'}
+            />
                 
             <Button 
                 variant="primary" 
