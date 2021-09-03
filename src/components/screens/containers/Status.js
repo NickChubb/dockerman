@@ -90,11 +90,18 @@ const Status = ({ containerState, id, getContainers }) => {
 
     const setButton = (status, id) => {
         switch (status) {
-            case 'running': 
+            case 'running':
                 return (
                     <>
                         <Button color='red' text='stop' onClick={() => { stopOnClick(id) }} />
                         <Button color='blue' text='Restart' onClick={() => { restartOnClick(id) }} />
+                    </>
+                );
+                break;
+            case 'restarting':
+                return (
+                    <>
+                        <Button color='red' text='stop' onClick={() => { stopOnClick(id) }} />
                     </>
                 );
                 break;
