@@ -10,7 +10,7 @@ import { AiOutlineLink } from 'react-icons/ai';
 const ServeForm = ({ ports, id, name, state }) => {
 
     const [domainName, setDomainName] = useState('');
-    const [enabled, setEnabled] = useState(false);
+    const [served, setServed] = useState(false);
     const [slug, setSlug] = useState('');
     const [port, setPort] = useState('0000');
     const [priv, setPriv] = useState(false);
@@ -23,7 +23,7 @@ const ServeForm = ({ ports, id, name, state }) => {
             setPriv(service.priv);
 
             if (state == 'running') {
-                setEnabled(service.served);
+                setServed(service.served);
             }
         });
 
@@ -35,11 +35,11 @@ const ServeForm = ({ ports, id, name, state }) => {
 
     const handleSubmit = (evt) => {
         evt.preventDefault();
-        updateService(name, enabled, slug, port, priv);
+        updateService({ name, served, slug, port, priv });
     } 
 
     const getLink = () => {
-        if ( !enabled ) return;
+        if ( !served ) return;
 
         return `https://${domainName}/${slug}/`;
     } 
@@ -53,10 +53,10 @@ const ServeForm = ({ ports, id, name, state }) => {
                 label="Serve"
                 id={"on-switch-" + name}
                 onChange={e => {
-                    setEnabled(e.target.checked);
+                    setServed(e.target.checked);
                 }}
-                value={enabled}
-                checked={enabled}
+                value={served}
+                checked={served}
                 disabled={state !== 'running'}
             />
 
@@ -65,7 +65,7 @@ const ServeForm = ({ ports, id, name, state }) => {
                 onChange={e => {
                     setPort(e.target.value);
                 }} 
-                disabled={!enabled} 
+                disabled={!served} 
             >
                 {
                     ports.map((port) => (
@@ -86,7 +86,7 @@ const ServeForm = ({ ports, id, name, state }) => {
                             setSlug(e.target.value);
                         }} 
                         value={slug}
-                        disabled={!enabled}
+                        disabled={!served}
                     /> 
                 
             </InputGroup>
