@@ -18,10 +18,8 @@ export const apiRequest = async (endpoint, method='GET', body=null, params=null)
         body = JSON.stringify(body);
     }
 
-    // Build headers using token from localStorage
-    const token = localStorage.getItem('token');
+    // Build headers
     const headers = new Headers({
-        'Authorization': 'Basic ' + Buffer.from(token).toString('base64'), 
         'Content-Type': 'application/json'
     });
 

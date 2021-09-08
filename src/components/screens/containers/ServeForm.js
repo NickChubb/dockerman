@@ -10,18 +10,20 @@ import { AiOutlineLink } from 'react-icons/ai';
 const ServeForm = ({ ports, id, name, state }) => {
 
     const [domainName, setDomainName] = useState('');
-    const [enabled, setEnabled] = useState(false);
+    const [served, setServed] = useState(false);
     const [slug, setSlug] = useState('');
     const [port, setPort] = useState('0000');
+    const [priv, setPriv] = useState(false);
 
     useEffect(() => {
         
         getService(name).then(service => {
             setSlug(service.slug);
             setPort(service.port);
+            setPriv(service.priv);
 
             if (state == 'running') {
-                setEnabled(service.served);
+                setServed(service.served);
             }
         });
 
@@ -33,11 +35,11 @@ const ServeForm = ({ ports, id, name, state }) => {
 
     const handleSubmit = (evt) => {
         evt.preventDefault();
-        updateService(name, enabled, slug, port);
+        updateService({ name, served, slug, port, priv });
     } 
 
     const getLink = () => {
-        if ( !enabled ) return;
+        if ( !served ) return;
 
         return `https://${domainName}/${slug}/`;
     } 
@@ -51,10 +53,10 @@ const ServeForm = ({ ports, id, name, state }) => {
                 label="Serve"
                 id={"on-switch-" + name}
                 onChange={e => {
-                    setEnabled(e.target.checked);
+                    setServed(e.target.checked);
                 }}
-                value={enabled}
-                checked={enabled}
+                value={served}
+                checked={served}
                 disabled={state !== 'running'}
             />
 
@@ -63,7 +65,7 @@ const ServeForm = ({ ports, id, name, state }) => {
                 onChange={e => {
                     setPort(e.target.value);
                 }} 
-                disabled={!enabled} 
+                disabled={!served} 
             >
                 {
                     ports.map((port) => (
@@ -84,10 +86,23 @@ const ServeForm = ({ ports, id, name, state }) => {
                             setSlug(e.target.value);
                         }} 
                         value={slug}
-                        disabled={!enabled}
+                        disabled={!served}
                     /> 
                 
             </InputGroup>
+
+            <Form.Check 
+                type="switch" 
+                className="mb-2 mr-sm-2" 
+                label="Private"
+                id={"priv-switch-" + name}
+                onChange={e => {
+                    setPriv(e.target.checked);
+                }}
+                value={priv}
+                checked={priv}
+                disabled={state !== 'running'}
+            />
                 
             <Button 
                 variant="primary" 
