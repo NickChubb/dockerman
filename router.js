@@ -1,9 +1,12 @@
 const express = require('express');
 const bodyParser = require('body-parser');
+const cookieParser = require("cookie-parser");
 const path = require('path');
 const proxy = require('express-http-proxy')
+
 const Config = require('./lib/config.js');
 const Database = require('./lib/database.js');
+const privateRoute = require('./lib/middleware/privateRoute.js');
 
 const Docker = require('dockerode');
 const docker = new Docker({ socketPath: '/var/run/docker.sock' });
@@ -28,6 +31,7 @@ class Router {
 
         this.app.use(bodyParser.urlencoded({ extended: false }));
         this.app.use(bodyParser.json());
+        this.app.use(cookieParser())
 
         // Routes for GUI and API
         this.app.use("/dockerman", express.static(path.join(__dirname + "/build")));
@@ -78,8 +82,14 @@ class Router {
                 .sort()
                 .reverse()
                 .forEach( service => {
-                    console.log(`🕸 serving ${service.name} on port:${service.port} at nickchubb.ca/${service.slug}`);  
-                    this.app.use('/' + service.slug, proxy('localhost:' + service.port))
+                    console.log(`🕸 serving ${service.name} on port:${service.port} at nickchubb.ca/${service.slug} with private: ${service.priv}`);  
+                    this.app.use('/' + service.slug, (req, res, next) => {
+                        // If service is private, use privateRoute middleware, else next()
+                        if (service.priv) {
+                            return privateRoute(req, res, next);
+                        }
+                        next();
+                    }, proxy('localhost:' + service.port))
                 });
         })
     }

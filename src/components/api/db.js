@@ -9,13 +9,6 @@ export const getService = async (name) => {
 
 export const updateService = async ( update ) => {
 
-    // const body = {
-    //     served: served,
-    //     slug: slug,
-    //     port: port,
-    //     priv: priv
-    // }
-
     let res = await dbApiRequest(`/services/${update.name}`, 'PUT', update);
     let data = await res.json();
     return data;

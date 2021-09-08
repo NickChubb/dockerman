@@ -1,16 +1,18 @@
 import { useState } from 'react';
+import Cookies from 'universal-cookie';
+const cookies = new Cookies();
 
 const useToken = () => {
     const getToken = () => {
-        const tokenString = localStorage.getItem('token');
-        const userToken = JSON.parse(tokenString);
-        return userToken?.token
+        return cookies.get('token');
     };
     const [token, setToken] = useState(getToken());
 
     const saveToken = (userToken) => {
-        localStorage.setItem('token', JSON.stringify(userToken));
-        setToken(userToken.token);
+        // Store token as cookie
+        const token = userToken?.token;
+        cookies.set('token', token, { path: "/" });
+        setToken(token);
     };
 
     return {
