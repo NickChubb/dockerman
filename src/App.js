@@ -3,7 +3,7 @@ import './App.css';
 /**
  * Import all page components here
  */
-import Routes from './Routes';
+import Routes from './pages/Routes.js';
 
 function App() {
   return (

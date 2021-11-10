@@ -1,0 +1,45 @@
+th {
+    text-align: right;
+}
+
+td {
+    text-align: left;
+    padding-left: 10px;
+}
+
+.container-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.container-list-item {
+    display: flex;
+    flex-direction: row;
+    background-color: red;
+}
+
+.container-list-item_main {
+    display: flex;
+    flex-direction: column;
+}
+
+.container-list-item_header {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+
+.container-list-item_controls {
+    font-size: 8;
+}
+
+.button-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.container-control-button {
+    padding: 5px 7.5px 5px 7.5px;
+}

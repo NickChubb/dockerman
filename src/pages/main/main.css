@@ -1,0 +1,45 @@
+.main-page {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.main-routes {
+    flex: 1 1 auto;
+    height: 100%;
+    overflow-y: auto;
+}
+
+.header {
+    padding: 15px;
+    background: #292929;
+    border-bottom: 2px solid #202020;
+    display: flex;
+    flex-direction: row;
+}
+
+.header-title {
+    flex: 1;    
+}
+
+.system-nav {
+    position: relative;
+    top: 50%;
+    right: 0%;
+    padding: 10px;
+    flex: 0;
+    display: flex;
+}
+
+.footer {
+    padding: 15px;
+    background: #292929;
+    text-align: center;
+    border-top: 2px solid #202020;
+    color: steelblue;
+}
+
+.tabs > * {
+    padding-left: 8px;
+    padding-right: 8px;
+}

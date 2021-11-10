@@ -1,0 +1,22 @@
+/*  
+    handles horizontal alignment with home screen (containers,
+    images, volumes, etc) elements with sidebar and info area.
+*/
+.home-screen {
+    display: flex;
+    flex-direction: row;
+}
+
+.side-panel {
+    /* position: absolute; */
+    /* left: 0px; */
+    /* overflow: scroll; */
+    /* max-width: 30%; */
+    
+}
+
+.info-panel {
+    
+}
+
+
