@@ -3,6 +3,7 @@ const bodyParser = require('body-parser');
 const cookieParser = require("cookie-parser");
 const path = require('path');
 const proxy = require('express-http-proxy')
+const cors = require('cors');
 
 const Config = require('./lib/config.js');
 const Database = require('./lib/database.js');
@@ -31,7 +32,8 @@ class Router {
 
         this.app.use(bodyParser.urlencoded({ extended: false }));
         this.app.use(bodyParser.json());
-        this.app.use(cookieParser())
+        this.app.use(cookieParser());
+        this.app.use(cors());
 
         // Routes for GUI and API
         this.app.use("/dockerman", express.static(path.join(__dirname + "/build")));
