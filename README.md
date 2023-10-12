@@ -8,7 +8,17 @@ I am currently no longer working on this project, as I have moved to using [Verc
 
 ## Photos
 
-![Container View](https://i.imgur.com/FtDWSMN.png)
+### Home
+
+![Container View](https://i.imgur.com/7I1RGFl.png)
+
+### Config Options
+
+![Config screen](https://i.imgur.com/TDxDVSc.png)
+
+### Activity Log Screen
+
+![Log Screen](https://i.imgur.com/E3zizY1.png)
 
 ## Features
 
