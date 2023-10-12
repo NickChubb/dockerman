@@ -1,6 +1,12 @@
-# DockerMan(ager)
+# DockerMan(ager) (Inactive 🚫)
 
 A simple server-side docker controller made with React.  Useful as a web backend for serving up containers.
+
+**Tech Stack: React.js, Express.js, Node.js, Docker.js, SQLite**
+
+I am currently no longer working on this project, as I have moved to using [Vercel](https://vercel.com/home) for hosting my personal portfolio website and other projects.
+
+## Photos
 
 ![Container View](https://i.imgur.com/FtDWSMN.png)
 
